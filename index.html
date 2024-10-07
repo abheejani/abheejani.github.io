@@ -122,62 +122,109 @@
 <!-- Featured Projects Section -->
 <div class="projects">
     <h2>Featured Projects</h2>
-    <div class="project-item fade-in">
+    <div class="project-item fade-in skewed-1">
         <h3>Project 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
     </div>
-    <div class="project-item fade-in">
+    <div class="project-item fade-in skewed-2">
         <h3>Project 2</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
     </div>
-    <div class="project-item fade-in">
+    <div class="project-item fade-in skewed-3">
         <h3>Project 3</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
     </div>
 </div>
 
-<!-- Scroll Animation Styles -->
+<!-- Enhanced Styles -->
 <style>
     .projects {
         margin-top: 150px;
         padding-bottom: 50px;
         text-align: center;
+        background-color: #001f3f;
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
     }
 
     .projects h2 {
-        font-size: 36px;
-        margin-bottom: 30px;
+        font-size: 40px;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 2;
+        color: #FFD700; /* Gold color for a more luxurious feel */
     }
 
     .projects .project-item {
         background-color: #003366;
         padding: 40px;
-        margin: 20px;
+        margin: 30px;
         border-radius: 15px;
-        display: inline-block;
-        width: 80%;
         color: white;
-        font-size: 20px; /* Larger text */
-        opacity: 0; /* Start hidden for fade-in effect */
-        transform: translateY(50px); /* Start slightly below */
-        transition: all 0.5s ease-in-out; /* Smooth transition */
+        font-size: 20px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease-in-out;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Add some depth */
+        background: linear-gradient(135deg, #003366, #004d99); /* Gradient background */
+        position: relative;
+        z-index: 2;
+        width: 30%;
+        display: inline-block;
+        transform: rotate(-2deg); /* Adds asymmetry */
     }
 
-    /* Triggering the fade-in effect */
+    .projects .project-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* Subtle pattern overlay */
+        opacity: 0.1;
+        z-index: 1;
+        border-radius: 15px;
+    }
+
+    /* Different skew/rotation for asymmetry */
+    .skewed-1 {
+        transform: rotate(-5deg) translateY(50px);
+    }
+
+    .skewed-2 {
+        transform: rotate(3deg) translateY(50px);
+    }
+
+    .skewed-3 {
+        transform: rotate(-2deg) translateY(50px);
+    }
+
+    /* Hover effect to create interaction */
+    .project-item:hover {
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        transform: rotate(0deg) translateY(0px); /* Straightens on hover */
+    }
+
+    /* Animation effect */
     .fade-in.visible {
         opacity: 1;
-        transform: translateY(0); /* Reset transform */
+        transform: translateY(0) rotate(0); /* Items straighten out when visible */
     }
 
     /* Media Queries for responsiveness */
     @media screen and (max-width: 768px) {
         .projects .project-item {
             width: 90%;
+            transform: none; /* Remove rotation for smaller screens */
         }
     }
 </style>
 
-<!-- Scroll Animation Script -->
+<!-- Scroll Animation Script (same as before) -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const projectItems = document.querySelectorAll('.project-item');
@@ -185,18 +232,19 @@
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible'); // Add 'visible' when in view
+                    entry.target.classList.add('visible');
                 } else {
-                    entry.target.classList.remove('visible'); // Remove 'visible' when out of view
+                    entry.target.classList.remove('visible');
                 }
             });
-        }, { threshold: 0.1 }); // Trigger when at least 10% of the element is visible
+        }, { threshold: 0.1 });
 
         projectItems.forEach(item => {
             observer.observe(item);
         });
     });
 </script>
+
 
 
 </body>
