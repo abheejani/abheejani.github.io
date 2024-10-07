@@ -1,0 +1,164 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #001f3f; /* Navy blue background */
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Taskbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: transparent;
+}
+
+.portfolio-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    background-color: #0074D9;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    background-color: #005bb5;
+}
+
+/* Intro Section */
+.intro {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.intro h1 {
+    font-size: 36px;
+}
+
+.intro .intro-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Featured Projects Section */
+.projects {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    background-color: #00264d; /* Background color for the projects section */
+    padding: 50px 0;
+}
+
+.projects h2 {
+    font-size: 28px; /* Slightly smaller heading for the projects */
+    margin-bottom: 40px;
+    color: #FFD700;
+    letter-spacing: 1.5px;
+}
+
+.project-item {
+    background-color: #003366;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    display: inline-block; /* Allows the items to appear side by side */
+    width: 28%; /* Smaller width to reduce box size */
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(50px); /* Start below to animate into view */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    vertical-align: top; /* Ensures proper alignment when side-by-side */
+}
+
+.project-item.visible {
+    opacity: 1;
+    transform: translateY(0); /* Moves the box into its proper position */
+}
+
+.project-item:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+}
+
+.project-item a {
+    display: block;
+    color: #FFD700;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.project-item iframe {
+    margin-top: 20px;
+    width: 100%; /* Adjusts the width to fit the project box */
+    height: 280px; /* Smaller height for the video */
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 500px) {
+    .project-item {
+        width: 45%; /* Adjust width for tablet-sized screens */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .project-item {
+        width: 90%; /* Full width on mobile devices */
+    }
+}
+
+
+/* Contact Section */
+.contact {
+    background-color: #001f3f; /* Same background as the top section */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.contact p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .project-item {
+        width: 90%;
+    }
+}
