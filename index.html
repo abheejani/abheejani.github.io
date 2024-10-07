@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Featured Projects Section -->
+<!-- Featured Projects Section -->
 <div class="projects">
     <h2>Featured Projects</h2>
     <div class="project-item fade-in">
@@ -179,18 +179,18 @@
 
 <!-- Scroll Animation Script -->
 <script>
-    // Intersection Observer to trigger the fade-in effect when items come into view
     document.addEventListener("DOMContentLoaded", function() {
         const projectItems = document.querySelectorAll('.project-item');
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Stop observing once it's visible
+                    entry.target.classList.add('visible'); // Add 'visible' when in view
+                } else {
+                    entry.target.classList.remove('visible'); // Remove 'visible' when out of view
                 }
             });
-        });
+        }, { threshold: 0.1 }); // Trigger when at least 10% of the element is visible
 
         projectItems.forEach(item => {
             observer.observe(item);
