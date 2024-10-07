@@ -120,21 +120,84 @@
     </div>
 
     <!-- Featured Projects Section -->
-    <div class="projects">
-        <h2>Featured Projects</h2>
-        <div class="project-item">
-            <h3>Project 1</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
-        </div>
-        <div class="project-item">
-            <h3>Project 2</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
-        </div>
-        <div class="project-item">
-            <h3>Project 3</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
-        </div>
+<div class="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-item fade-in">
+        <h3>Project 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
     </div>
+    <div class="project-item fade-in">
+        <h3>Project 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
+    </div>
+    <div class="project-item fade-in">
+        <h3>Project 3</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.</p>
+    </div>
+</div>
+
+<!-- Scroll Animation Styles -->
+<style>
+    .projects {
+        margin-top: 150px;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+
+    .projects h2 {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .projects .project-item {
+        background-color: #003366;
+        padding: 40px;
+        margin: 20px;
+        border-radius: 15px;
+        display: inline-block;
+        width: 80%;
+        color: white;
+        font-size: 20px; /* Larger text */
+        opacity: 0; /* Start hidden for fade-in effect */
+        transform: translateY(50px); /* Start slightly below */
+        transition: all 0.5s ease-in-out; /* Smooth transition */
+    }
+
+    /* Triggering the fade-in effect */
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0); /* Reset transform */
+    }
+
+    /* Media Queries for responsiveness */
+    @media screen and (max-width: 768px) {
+        .projects .project-item {
+            width: 90%;
+        }
+    }
+</style>
+
+<!-- Scroll Animation Script -->
+<script>
+    // Intersection Observer to trigger the fade-in effect when items come into view
+    document.addEventListener("DOMContentLoaded", function() {
+        const projectItems = document.querySelectorAll('.project-item');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+            });
+        });
+
+        projectItems.forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+
 
 </body>
 </html>
