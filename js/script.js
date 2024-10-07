@@ -1,5 +1,7 @@
-// Existing Scroll Animation Script
+// Scroll Animation and Magic Card Trick Script
+
 document.addEventListener("DOMContentLoaded", function() {
+    // Scroll Animation
     const projectItems = document.querySelectorAll('.project-item');
 
     const observer = new IntersectionObserver(entries => {
@@ -16,6 +18,14 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(item);
     });
 
+    // Menu Toggle for Mobile View
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+
     // Add the event listener for the start button
     const startButton = document.getElementById('startButton');
     if (startButton) {
@@ -23,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Card Trick JavaScript Code
+// Magic Card Trick JavaScript Code
 let game = {
     deck: [],
     rounds: 0,
@@ -62,6 +72,8 @@ function startGame() {
     deck = shuffle(deck);
     game.deck = deck.slice(0, 21);
     game.rounds = 0;
+
+    alert("Memorize one of the following cards and click on the column where your card is located.");
 
     dealCards();
 }
@@ -160,6 +172,8 @@ function revealCard() {
 
     const resultDiv = document.createElement('div');
     resultDiv.innerText = `I figured it out! Your card was the ${game.deck[10]}.`;
+    resultDiv.style.fontSize = '18px';
+    resultDiv.style.marginBottom = '20px';
 
     columnsContainer.appendChild(resultDiv);
 

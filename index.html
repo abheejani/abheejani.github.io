@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhee's Portfolio</title>
     <meta name="description" content="Abhee's Portfolio">
     <meta name="author" content="Abhee Jani">
-    <title>Abhee's Portfolio</title>
 
     <!-- Link to the CSS file -->
     <link rel="stylesheet" href="css/styles.css">
@@ -15,7 +15,10 @@
     <!-- Taskbar -->
     <div class="navbar">
         <div class="portfolio-name">Abhee's Portfolio</div>
-        <div class="nav-links">
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+            &#9776;
+        </div>
+        <div class="nav-links" id="nav-links">
             <a href="assets/files/abheeresume.pdf" target="_blank">Resume</a>
             <a href="https://www.linkedin.com/in/abheejani" target="_blank">LinkedIn</a>
             <a href="https://github.com/abheejani" target="_blank">GitHub</a>
@@ -43,26 +46,10 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/M6XTartb0Kw" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- Project 1 -->
-        <div class="project-item fade-in">
-            <h3>Smart Stroll (Modified Dijkstra's Algorithm in Python)</h3>
-            <p>An optimized route planner using a custom graph-building algorithm and modified Dijkstra's algorithm. Integrated Google Maps API for geolocation.</p>
-            <a href="https://github.com/your-repo-link" target="_blank">GitHub Repo</a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/M6XTartb0Kw" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 1 -->
+        <!-- Project 2 -->
         <div class="project-item fade-in">
             <h3>Flight Insight Full Stack Application</h3>
             <p>Developed a full-stack application for flight delay pattern analysis using Python, Flask, React, and SQL. Implemented advanced indexing strategies to optimize performance.</p>
-            <a href="https://github.com/your-repo-link" target="_blank">GitHub Repo</a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-item fade-in">
-            <h3>Custom Linux-Based Operating System</h3>
-            <p>Developed kernel modules in C, focusing on scheduling, memory management, and file management. Implemented custom system calls and optimized device drivers.</p>
             <a href="https://github.com/your-repo-link" target="_blank">GitHub Repo</a>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
         </div>
@@ -78,7 +65,7 @@
         <!-- Magic Card Trick Project -->
         <div class="project-item fade-in">
             <h3>Magic Card Trick</h3>
-            <p>My simple but fun implementation of the famous 21 card trick. Give it a go!</p>
+            <p>Experience a classic magic trick where I can guess your card after a few simple steps. Give it a try!</p>
             <!-- Magic Card Trick Game Container -->
             <div id="cardTrickContainer" class="magic-game-container">
                 <button id="startButton">Start Magic Trick</button>
@@ -86,12 +73,7 @@
                 <div id="columnsContainer" class="columns"></div>
             </div>
         </div>
-       
-    
     </div>
-
-        
-
 
     <!-- Contact Information Section -->
     <div class="contact">
@@ -100,11 +82,11 @@
         <ul>
             <li>Email: <a href="mailto:abheejani@gmail.com">abheejani@gmail.com</a></li>
             <li>LinkedIn: <a href="https://www.linkedin.com/in/abheejani" target="_blank">Abhee Jani</a></li>
-            <li>Phone: <a href="https://github.com/abheejani" target="_blank">+1 732-331-7179</a></li>
+            <li>Phone: <a href="tel:+17323317179">+1 732-331-7179</a></li>
         </ul>
     </div>
 
-    <!-- Scroll Animation Script -->
+    <!-- Scroll Animation and Magic Trick Script -->
     <script src="js/script.js"></script>
 
 </body>
