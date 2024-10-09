@@ -176,10 +176,4 @@ function revealCard() {
     resultDiv.style.marginBottom = '20px';
 
     columnsContainer.appendChild(resultDiv);
-
-    const playAgainButton = document.createElement('button');
-    playAgainButton.innerText = 'Play Again';
-    playAgainButton.addEventListener('click', startGame);
-
-    columnsContainer.appendChild(playAgainButton);
 }
