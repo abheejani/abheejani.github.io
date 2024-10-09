@@ -75,6 +75,9 @@ body {
     margin-right: 30px;
     border: 5px solid #e88128;
     object-fit: cover;
+    object-position: 600% 0%;
+
+    
 }
 
 .intro-text {
