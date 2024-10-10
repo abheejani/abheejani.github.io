@@ -1,3 +1,12 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevent any horizontal scrollbars */
+    box-sizing: border-box;
+}
+
+
 /* General Body Styling */
 body {
     font-family: 'Arial', sans-serif;
@@ -100,10 +109,13 @@ body {
     margin-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-    background-color: #00264d; /* Dark background color for projects */
+    background-color: #00264d;
     padding: 50px 0;
-    width: 100%; /* Ensure full width */
-    box-sizing: border-box; /* Include padding in width calculation */
+    width: calc(100vw - 17px); /* Account for scrollbar width */
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box; /* Make sure padding doesn't cause overflow */
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 .projects h2 {
@@ -281,8 +293,20 @@ body {
 
 @media screen and (max-width: 768px) {
     .project-item {
-        width: 90%;
+        width: 90%; /* Full width with a bit of padding */
+        margin: 0 auto 20px auto; /* Center the items */
+        text-align: center; /* Center-align text inside each project */
+        box-sizing: border-box;
     }
+
+    .projects {
+        text-align: center; /* Center-aligns text */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Ensures children elements are centered horizontally */
+        justify-content: center;
+    }   
 
     /* Navbar adjustments */
     .navbar {
