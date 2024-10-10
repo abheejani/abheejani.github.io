@@ -297,6 +297,7 @@ body {
         margin: 0 0 20px 0; /* Center the items */
         text-align: center; /* Center-align text inside each project */
         box-sizing: border-box;
+        position: relative; /* Ensure it doesn't interfere with scroll */
     }
 
     .projects {
@@ -307,9 +308,14 @@ body {
         align-items: center; /* Ensures children elements are centered horizontally */
         justify-content: center;
         margin: 0;
-        width: 100%
-
+        width: 100%;
+        overflow: visible; 
+        height: auto;
     }   
+
+    .projects, .project-item {
+        pointer-events: auto; /* Ensure scrolling is allowed */
+    }
 
     /* Navbar adjustments */
     .navbar {
