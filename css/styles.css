@@ -293,19 +293,22 @@ body {
 
 @media screen and (max-width: 768px) {
     .project-item {
-        width: 90%; /* Full width with a bit of padding */
-        margin: 0 auto 20px auto; /* Center the items */
+        width: 100%; /* Full width with a bit of padding */
+        margin: 0 0 20px 0; /* Center the items */
         text-align: center; /* Center-align text inside each project */
         box-sizing: border-box;
     }
 
     .projects {
         text-align: center; /* Center-aligns text */
-        padding: 20px;
+        padding: 20px 0;
         display: flex;
         flex-direction: column;
         align-items: center; /* Ensures children elements are centered horizontally */
         justify-content: center;
+        margin: 0;
+        width: 100%
+
     }   
 
     /* Navbar adjustments */
