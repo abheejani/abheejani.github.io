@@ -100,8 +100,10 @@ body {
     margin-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-    background-color: #00264d; /* Background color for the projects section */
+    background-color: #00264d; /* Dark background color for projects */
     padding: 50px 0;
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .projects h2 {
