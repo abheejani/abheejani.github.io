@@ -7,12 +7,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, 100); // Adds a small delay to avoid flickering
             } else {
-                entry.target.classList.remove('visible');
+                setTimeout(() => {
+                    entry.target.classList.remove('visible');
+                }, 100); // Small delay for removing the class as well
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: [0, 0.5, 1] }); // You can experiment with these values
+    
 
     projectItems.forEach(item => {
         observer.observe(item);
