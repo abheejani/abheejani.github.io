@@ -413,13 +413,14 @@ input:checked + .slider .moon-icon {
 
     /* Show the menu toggle button */
     .menu-toggle {
-        display: block;
+        display: none;
     }
 
     /* Hide nav-links by default */
     .nav-links {
-        display: none;
+        display: flex;
         flex-direction: column;
+        gap: 10px;
         width: 100%;
     }
 
@@ -430,9 +431,16 @@ input:checked + .slider .moon-icon {
 
     .nav-links a {
         width: 100%;
-        text-align: left;
-        padding: 15px 20px;
-        border-bottom: 1px solid #005bb5;
+        text-align: center;
+        padding: 10px;
+        background-color: var(--link-bg);
+        border-radius: 5px;
+    }
+
+    /* Reduce font size and padding for mobile */
+    .nav-links a {
+        font-size: 14px;
+        padding: 12px;
     }
 
     .nav-links a:last-child {
@@ -454,3 +462,6 @@ input:checked + .slider .moon-icon {
         border-top: 5px solid var(--accent-color);
     }
 }
+
+
+
