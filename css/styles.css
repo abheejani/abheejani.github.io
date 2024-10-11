@@ -14,19 +14,20 @@
 
 /* Light Mode Variables */
 body.light-mode {
-    --primary-bg: #f0f0f0; /* Light grey background */
+    --primary-bg: #f0f0f0; /* Light background */
     --primary-text: #1a1a1a; /* Dark text */
     --accent-color: #0070C9; /* Blue accent */
-    --link-color: #0070C9; /* Blue link */
-    --link-bg: #ffffff; /* White link background */
-    --link-hover-bg: #e0e0e0; /* Light grey link hover */
-    --border-color: #cccccc; /* Light border */
-    --project-bg: #ffffff; /* White project backgrounds */
+    --link-color: #0070C9; /* Blue link color */
+    --link-bg: #ffffff; /* White background */
+    --link-hover-bg: #e0e0e0; /* Light grey hover */
+    --border-color: #cccccc; /* Light grey borders */
+    --project-bg: #ffffff; /* White project background */
     --highlight-color: #0070C9; /* Blue highlight */
-    --button-bg: #0070C9; /* Blue button */
-    --button-hover-bg: #005bb5; /* Darker blue button hover */
+    --button-bg: #0070C9; /* Blue button background */
+    --button-hover-bg: #005bb5; /* Darker blue on hover */
 }
 
+/* General Body Styling */
 body, html {
     margin: 0;
     padding: 0;
@@ -43,12 +44,14 @@ body {
     padding: 0;
 }
 
-/* Navbar */
+/* Taskbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    background-color: transparent;
+    flex-wrap: wrap;
 }
 
 .portfolio-name {
@@ -56,7 +59,38 @@ body {
     font-weight: bold;
 }
 
-/* Toggle Switch Styling */
+/* Menu Toggle */
+.menu-toggle {
+    display: none;
+    font-size: 36px;
+    cursor: pointer;
+    color: var(--accent-color);
+    padding: 10px;
+    background-color: var(--primary-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--link-color);
+    background-color: var(--link-bg);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    background-color: var(--link-hover-bg);
+}
+
+/* Dark Mode Toggle */
 .theme-switch {
     position: relative;
     display: inline-block;
@@ -102,7 +136,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Sun and Moon Icons */
 .sun-icon {
     position: absolute;
     top: 6px;
@@ -127,37 +160,6 @@ input:checked + .slider .sun-icon {
 
 input:checked + .slider .moon-icon {
     opacity: 1;
-}
-
-/* Menu Toggle */
-.menu-toggle {
-    display: none;
-    font-size: 36px;
-    cursor: pointer;
-    color: var(--accent-color);
-    padding: 10px;
-    background-color: var(--primary-bg);
-    border: 2px solid var(--accent-color);
-    border-radius: 5px;
-}
-
-/* Navigation Links */
-.nav-links {
-    display: flex;
-    gap: 10px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--link-color);
-    background-color: var(--link-bg);
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 16px;
-}
-
-.nav-links a:hover {
-    background-color: var(--link-hover-bg);
 }
 
 /* Intro Section */
@@ -186,7 +188,7 @@ input:checked + .slider .moon-icon {
     margin-right: 30px;
     border: 5px solid var(--accent-color);
     object-fit: cover;
-    object-position: 600% 0%;
+    object-position: center;
 }
 
 .intro-text {
@@ -343,11 +345,6 @@ input:checked + .slider .moon-icon {
     margin-bottom: 30px;
 }
 
-.contact p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
 .contact ul {
     list-style-type: none;
     padding: 0;
@@ -406,10 +403,6 @@ input:checked + .slider .moon-icon {
         width: 100%;
         overflow: visible; 
         height: auto;
-    }   
-
-    .projects, .project-item {
-        pointer-events: auto; /* Ensure scrolling is allowed */
     }
 
     /* Navbar adjustments */
@@ -420,12 +413,12 @@ input:checked + .slider .moon-icon {
 
     /* Show the menu toggle button */
     .menu-toggle {
-        display: none;
+        display: block;
     }
 
     /* Hide nav-links by default */
     .nav-links {
-        display: block;
+        display: none;
         flex-direction: column;
         width: 100%;
     }
@@ -433,11 +426,6 @@ input:checked + .slider .moon-icon {
     /* Show nav-links when menu is active */
     .nav-links.active {
         display: flex;
-    }
-
-    /* Show the toggle button always */
-    .toggle-button {
-        margin-top: 10px;
     }
 
     .nav-links a {
@@ -463,6 +451,6 @@ input:checked + .slider .moon-icon {
 
     .intro-text {
         border-left: none;
-        border-top: 5px solid #e88128;
+        border-top: 5px solid var(--accent-color);
     }
 }

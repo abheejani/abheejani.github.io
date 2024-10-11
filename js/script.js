@@ -1,4 +1,5 @@
 // Scroll Animation and Magic Card Trick Script
+
 document.addEventListener("DOMContentLoaded", function() {
     // Scroll Animation
     const projectItems = document.querySelectorAll('.project-item');
@@ -30,12 +31,16 @@ document.addEventListener("DOMContentLoaded", function() {
         navLinks.classList.toggle('active');
     });
 
+    // Add the event listener for the start button
+    const startButton = document.getElementById('startButton');
+    if (startButton) {
+        startButton.addEventListener('click', startGame);
+    }
+
     // Dark Mode Toggle
     const checkbox = document.getElementById('checkbox');
     checkbox.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
-
-        // Save the user's theme preference
         if (document.body.classList.contains('light-mode')) {
             localStorage.setItem('theme', 'light');
         } else {
@@ -43,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Load the saved theme from localStorage
+    // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-mode');
@@ -62,14 +67,10 @@ let game = {
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
-    // While there remain elements to shuffle...
     while (currentIndex !== 0) {
-
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
 
@@ -119,11 +120,9 @@ function dealCards() {
 }
 
 function displayColumns() {
-    // Clear the previous display
     const columnsContainer = document.getElementById('columnsContainer');
     columnsContainer.innerHTML = '';
 
-    // Create the columns
     for (let i = 0; i < 3; i++) {
         let columnDiv = document.createElement('div');
         columnDiv.classList.add('column');
@@ -132,7 +131,6 @@ function displayColumns() {
         columnTitle.innerText = `Column ${i + 1}`;
         columnDiv.appendChild(columnTitle);
 
-        // Add the cards
         let columnCards = game.columns[i];
         for (let card of columnCards) {
             let cardDiv = document.createElement('div');
@@ -141,7 +139,6 @@ function displayColumns() {
             columnDiv.appendChild(cardDiv);
         }
 
-        // Add event listener for selection
         columnDiv.addEventListener('click', function() {
             columnSelected(i);
         });
@@ -149,7 +146,6 @@ function displayColumns() {
         columnsContainer.appendChild(columnDiv);
     }
 
-    // Display instructions
     const instructions = document.getElementById('instructions');
     if (game.rounds < game.maxRounds) {
         instructions.innerText = `Round ${game.rounds}: Click on the column where your card is located. We will do this ${game.maxRounds - game.rounds} more time(s).`;
@@ -159,7 +155,6 @@ function displayColumns() {
 }
 
 function columnSelected(columnIndex) {
-    // Rearrange the deck based on the selected column
     const selectedColumn = game.columns[columnIndex];
 
     let newDeck = [];
