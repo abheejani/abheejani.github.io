@@ -1,29 +1,54 @@
+:root {
+    --primary-bg: #1a1a1a; /* Dark grey background */
+    --primary-text: #f0f0f0; /* Light grey text */
+    --accent-color: #808080; /* Medium grey for accent */
+    --link-color: #f0f0f0; /* Light grey for links */
+    --link-bg: #333333; /* Darker grey for link background */
+    --link-hover-bg: #4d4d4d; /* Slightly lighter grey on hover */
+    --border-color: #666666; /* Medium-light grey for borders */
+    --project-bg: #333333; /* Dark grey for project backgrounds */
+    --highlight-color: #999999; /* Light grey for highlights */
+    --button-bg: #4d4d4d; /* Grey for button background */
+    --button-hover-bg: #666666; /* Slightly lighter grey for button hover */
+}
+
+/* Light Mode Variables */
+body.light-mode {
+    --primary-bg: #f0f0f0; /* Light grey background */
+    --primary-text: #1a1a1a; /* Dark text */
+    --accent-color: #0070C9; /* Blue accent */
+    --link-color: #0070C9; /* Blue link */
+    --link-bg: #ffffff; /* White link background */
+    --link-hover-bg: #e0e0e0; /* Light grey link hover */
+    --border-color: #cccccc; /* Light border */
+    --project-bg: #ffffff; /* White project backgrounds */
+    --highlight-color: #0070C9; /* Blue highlight */
+    --button-bg: #0070C9; /* Blue button */
+    --button-hover-bg: #005bb5; /* Darker blue button hover */
+}
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Prevent any horizontal scrollbars */
+    overflow-x: hidden;
     box-sizing: border-box;
 }
 
-
-/* General Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #001f3f; /* Navy blue background */
-    color: white;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
     margin: 0;
     padding: 0;
 }
 
-/* Taskbar */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: transparent;
-    flex-wrap: wrap;
 }
 
 .portfolio-name {
@@ -31,16 +56,89 @@ body {
     font-weight: bold;
 }
 
-/* Hide the menu toggle button by default */
+/* Toggle Switch Styling */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--button-bg);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--primary-text);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--button-hover-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Sun and Moon Icons */
+.sun-icon {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    font-size: 14px;
+    transition: opacity 0.4s;
+    opacity: 1;
+}
+
+.moon-icon {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 14px;
+    transition: opacity 0.4s;
+    opacity: 0;
+}
+
+input:checked + .slider .sun-icon {
+    opacity: 0;
+}
+
+input:checked + .slider .moon-icon {
+    opacity: 1;
+}
+
+/* Menu Toggle */
 .menu-toggle {
     display: none;
     font-size: 36px;
     cursor: pointer;
-    color: #e88128;
+    color: var(--accent-color);
     padding: 10px;
-    background-color: #001f3f; /* Add a background */
-    border: 2px solid #e88128; /* Optional border for better visibility */
-    border-radius: 5px; /* Rounded corners */
+    background-color: var(--primary-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
 }
 
 /* Navigation Links */
@@ -51,15 +149,15 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: white;
-    background-color: #003366;
+    color: var(--link-color);
+    background-color: var(--link-bg);
     padding: 10px 20px;
     border-radius: 25px;
     font-size: 16px;
 }
 
 .nav-links a:hover {
-    background-color: #00264d;
+    background-color: var(--link-hover-bg);
 }
 
 /* Intro Section */
@@ -70,10 +168,10 @@ body {
 
 .intro h1 {
     font-size: 36px;
-    color: #e88128;
+    color: var(--accent-color);
 }
 
-/* Intro Content Styling */
+/* Intro Content */
 .intro-content {
     display: flex;
     align-items: center;
@@ -86,70 +184,67 @@ body {
     height: 200px;
     border-radius: 50%;
     margin-right: 30px;
-    border: 5px solid #e88128;
+    border: 5px solid var(--accent-color);
     object-fit: cover;
     object-position: 600% 0%;
-
-    
 }
 
 .intro-text {
     max-width: 600px;
-    background-color: #00264d;
+    background-color: var(--link-hover-bg);
     padding: 20px;
-    border-left: 5px solid #e88128;
+    border-left: 5px solid var(--accent-color);
     border-radius: 10px;
     font-size: 18px;
     line-height: 1.6;
-    color: white;
+    color: var(--primary-text);
 }
 
-/* Featured Projects Section */
+/* Featured Projects */
 .projects {
     margin-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-    background-color: #00264d;
+    background-color: var(--link-hover-bg);
     padding: 50px 0;
-    width: calc(100vw - 17px); /* Account for scrollbar width */
+    width: calc(100vw - 17px);
     margin-left: 0;
     margin-right: 0;
-    box-sizing: border-box; /* Make sure padding doesn't cause overflow */
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .projects h2 {
     font-size: 36px;
     margin-bottom: 40px;
-    color: #e88128;
+    color: var(--accent-color);
     letter-spacing: 1.5px;
 }
 
 .projects h3 {
-    color: #e88128;
+    color: var(--accent-color);
 }
 
 .projects u {
-    color: #369bda;
+    color: var(--highlight-color);
 }
 
 .project-item {
-    background-color: #003366;
+    background-color: var(--project-bg);
     padding: 20px;
     margin: 20px;
     border-radius: 15px;
-    color: white;
+    color: var(--primary-text);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transform: translateY(50px);
-    will-change: opacity, transform; /* Optimizes animation */
+    will-change: opacity, transform;
     transition: opacity 0.6s ease, transform 0.6s ease;
-    transform: translateZ(0); /* Forces GPU acceleration */
+    transform: translateZ(0);
     display: inline-block;
     width: 28%;
     vertical-align: top;
 }
-
 
 .project-item.visible {
     opacity: 1;
@@ -163,7 +258,7 @@ body {
 
 .project-item a {
     display: block;
-    color: #e88128;
+    color: var(--accent-color);
     text-decoration: none;
     margin-top: 10px;
 }
@@ -174,24 +269,24 @@ body {
     height: 280px;
 }
 
-/* Placeholder for Projects without Video */
+/* Placeholder for Projects */
 .project-placeholder {
     margin-top: 20px;
-    background-color: #00264d;
+    background-color: var(--link-hover-bg);
     padding: 20px;
     border-radius: 10px;
     color: #ccc;
     font-size: 16px;
 }
 
-/* Magic Card Trick Specific Styles */
+/* Magic Card Trick */
 .magic-game-container {
     margin-top: 20px;
 }
 
 .magic-game-container button {
-    background-color: #0074D9;
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--primary-text);
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
@@ -201,7 +296,7 @@ body {
 }
 
 .magic-game-container button:hover {
-    background-color: #005bb5;
+    background-color: var(--button-hover-bg);
 }
 
 .instructions {
@@ -220,8 +315,8 @@ body {
     min-width: 150px;
     margin: 10px;
     padding: 10px;
-    border: 2px solid #FFD700;
-    background-color: #00264d;
+    border: 2px solid var(--border-color);
+    background-color: var(--link-hover-bg);
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
@@ -238,7 +333,7 @@ body {
 
 /* Contact Section */
 .contact {
-    background-color: #001f3f; /* Same background as the top section */
+    background-color: var(--primary-bg);
     padding: 50px 0;
     text-align: center;
 }
@@ -264,7 +359,7 @@ body {
 }
 
 .contact a {
-    color: #e88128;
+    color: var(--accent-color);
     text-decoration: none;
 }
 
@@ -325,12 +420,12 @@ body {
 
     /* Show the menu toggle button */
     .menu-toggle {
-        display: block;
+        display: none;
     }
 
     /* Hide nav-links by default */
     .nav-links {
-        display: none;
+        display: block;
         flex-direction: column;
         width: 100%;
     }
@@ -338,6 +433,11 @@ body {
     /* Show nav-links when menu is active */
     .nav-links.active {
         display: flex;
+    }
+
+    /* Show the toggle button always */
+    .toggle-button {
+        margin-top: 10px;
     }
 
     .nav-links a {

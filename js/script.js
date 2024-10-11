@@ -1,5 +1,4 @@
 // Scroll Animation and Magic Card Trick Script
-
 document.addEventListener("DOMContentLoaded", function() {
     // Scroll Animation
     const projectItems = document.querySelectorAll('.project-item');
@@ -31,10 +30,24 @@ document.addEventListener("DOMContentLoaded", function() {
         navLinks.classList.toggle('active');
     });
 
-    // Add the event listener for the start button
-    const startButton = document.getElementById('startButton');
-    if (startButton) {
-        startButton.addEventListener('click', startGame);
+    // Dark Mode Toggle
+    const checkbox = document.getElementById('checkbox');
+    checkbox.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
+
+        // Save the user's theme preference
+        if (document.body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+        } else {
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
+    // Load the saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        checkbox.checked = true;
     }
 });
 
