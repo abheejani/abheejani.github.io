@@ -138,8 +138,8 @@ input:checked + .slider:before {
 
 .sun-icon {
     position: absolute;
-    top: 6px;
-    left: 10px;
+    top: 6.5px;
+    left: 7px;
     font-size: 14px;
     transition: opacity 0.4s;
     opacity: 1;
@@ -148,7 +148,7 @@ input:checked + .slider:before {
 .moon-icon {
     position: absolute;
     top: 6px;
-    right: 10px;
+    right: 8px;
     font-size: 14px;
     transition: opacity 0.4s;
     opacity: 0;
