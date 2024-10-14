@@ -204,6 +204,12 @@ input:checked + .slider .moon-icon {
     color: var(--primary-text);
 }
 
+.intro-text {
+    text-align: left; /* Ensures the text is left-aligned */
+    margin-left: 15px; /* Optional: Adds some spacing between the image and text */
+    line-height: 1.6; /* Optional: Improves readability by adjusting line spacing */
+}
+
 /* Featured Projects */
 .projects {
     margin-top: 50px;
