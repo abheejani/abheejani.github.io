@@ -1,31 +1,33 @@
 :root {
-    --primary-bg: #1a1a1a; /* Dark grey background */
-    --primary-text: #f0f0f0; /* Light grey text */
-    --accent-color: #808080; /* Medium grey for accent */
-    --link-color: #f0f0f0; /* Light grey for links */
-    --link-bg: #333333; /* Darker grey for link background */
-    --link-hover-bg: #4d4d4d; /* Slightly lighter grey on hover */
-    --border-color: #666666; /* Medium-light grey for borders */
-    --project-bg: #333333; /* Dark grey for project backgrounds */
-    --highlight-color: #999999; /* Light grey for highlights */
-    --button-bg: #4d4d4d; /* Grey for button background */
-    --button-hover-bg: #666666; /* Slightly lighter grey for button hover */
+    /* Default Colors (Dark Mode) */
+    --primary-bg: #0d1117; /* Dark navy with a subtle hint of blue */
+    --primary-text: #c9d1d9; /* Soft white-grey for a pleasant reading experience */
+    --accent-color: #58a6ff; /* Vibrant sky blue for accents */
+    --link-color: #79c0ff; /* Light blue with a bit of vibrancy for links */
+    --link-bg: #161b22; /* Darker blue-grey for link background */
+    --link-hover-bg: #21262d; /* Slightly lighter on hover for a subtle effect */
+    --border-color: #30363d; /* Muted grey-blue for borders */
+    --project-bg: #161b22; /* Dark blue-grey to keep sections cohesive */
+    --highlight-color: #f4a261; /* Warm amber to add energy to highlights */
+    --button-bg: #0070C9; /* Rich green for button backgrounds */
+    --button-hover-bg: #005bb5; /* Brighter green on hover for a lively effect */
 }
 
 /* Light Mode Variables */
 body.light-mode {
-    --primary-bg: #f0f0f0; /* Light background */
-    --primary-text: #1a1a1a; /* Dark text */
-    --accent-color: #0070C9; /* Blue accent */
-    --link-color: #0070C9; /* Blue link color */
-    --link-bg: #ffffff; /* White background */
-    --link-hover-bg: #e0e0e0; /* Light grey hover */
-    --border-color: #cccccc; /* Light grey borders */
-    --project-bg: #ffffff; /* White project background */
-    --highlight-color: #0070C9; /* Blue highlight */
-    --button-bg: #0070C9; /* Blue button background */
-    --button-hover-bg: #005bb5; /* Darker blue on hover */
+    --primary-bg: #f8f9fa; /* Soft, neutral light background */
+    --primary-text: #1a1a1a; /* Dark text for readability */
+    --accent-color: #0070C9; /* Bright blue accent for consistency */
+    --link-color: #0070C9; /* Same blue for links to maintain theme */
+    --link-bg: #ffffff; /* White background for links */
+    --link-hover-bg: #e0e0e0; /* Light grey on hover for subtle interaction */
+    --border-color: #d1d5da; /* Softer grey for borders */
+    --project-bg: #ffffff; /* White background for project sections */
+    --highlight-color: #f4a261; /* Warm amber highlight shared with dark mode */
+    --button-bg: #0070C9; /* Blue button background for continuity */
+    --button-hover-bg: #005bb5; /* Slightly darker blue on hover */
 }
+
 
 /* General Body Styling */
 body, html {
