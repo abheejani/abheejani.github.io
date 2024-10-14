@@ -417,6 +417,7 @@ input:checked + .slider .moon-icon {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
+        gap: 15px;
     }
 
     /* Show the menu toggle button */
