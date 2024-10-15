@@ -28,7 +28,6 @@ body.light-mode {
     --button-hover-bg: #005bb5; /* Slightly darker blue on hover */
 }
 
-
 /* General Body Styling */
 body, html {
     margin: 0;
@@ -206,9 +205,9 @@ input:checked + .slider .moon-icon {
 }
 
 .intro-text {
-    text-align: left; /* Ensures the text is left-aligned */
-    margin-left: 15px; /* Optional: Adds some spacing between the image and text */
-    line-height: 1.6; /* Optional: Improves readability by adjusting line spacing */
+    text-align: left; 
+    margin-left: 15px;
+    line-height: 1.6; 
 }
 
 /* Featured Projects */
@@ -393,40 +392,46 @@ input:checked + .slider .moon-icon {
 }
 
 @media screen and (max-width: 768px) {
+    /* Project Items */
     .project-item {
-        width: 100%; /* Full width with a bit of padding */
-        margin: 0 0 20px 0; /* Center the items */
-        text-align: center; /* Center-align text inside each project */
+        width: 100%; /* Full width */
+        margin: 0 0 20px 0; /* Add spacing below each item */
+        text-align: center; /* Center-align text */
+        padding-left: 15px; /* Add left padding */
+        padding-right: 15px; /* Optional: Keep symmetrical padding */
         box-sizing: border-box;
         position: relative; /* Ensure it doesn't interfere with scroll */
     }
 
+    /* Projects Section */
     .projects {
-        text-align: center; /* Center-aligns text */
+        text-align: center;
         padding: 20px 0;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Ensures children elements are centered horizontally */
+        align-items: center;
         justify-content: center;
         margin: 0;
         width: 100%;
-        overflow: visible; 
+        overflow: visible;
         height: auto;
     }
 
-    /* Navbar adjustments */
+    /* Navbar Adjustments */
     .navbar {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
+        padding-left: 15px; /* Add left padding to navbar */
+        padding-right: 15px; /* Optional: Ensure consistent right padding */
     }
 
-    /* Show the menu toggle button */
+    /* Show the Menu Toggle Button */
     .menu-toggle {
         display: none;
     }
 
-    /* Hide nav-links by default */
+    /* Navigation Links */
     .nav-links {
         display: flex;
         flex-direction: column;
@@ -434,33 +439,37 @@ input:checked + .slider .moon-icon {
         width: 100%;
     }
 
-    /* Show nav-links when menu is active */
+    /* Show Nav-Links When Active */
     .nav-links.active {
         display: flex;
     }
 
+    /* Navbar Links */
     .nav-links a {
         width: 100%;
-        text-align: center;
-        padding: 10px;
+        text-align: left; /* Align text to the left */
+        padding: 10px 15px; /* Add padding inside each link */
         background-color: var(--link-bg);
         border-radius: 5px;
+        box-sizing: border-box;
     }
 
-    /* Reduce font size and padding for mobile */
+    /* Font Size and Padding Adjustments for Mobile */
     .nav-links a {
         font-size: 14px;
-        padding: 12px;
+        padding: 12px 15px;
     }
 
     .nav-links a:last-child {
         border-bottom: none;
     }
 
-    /* Intro Content adjustments */
+    /* Intro Content Adjustments */
     .intro-content {
         flex-direction: column;
         text-align: center;
+        padding-left: 15px; /* Add left padding for intro content */
+        padding-right: 15px; /* Optional: Keep symmetrical padding */
     }
 
     .intro-image {
@@ -470,8 +479,7 @@ input:checked + .slider .moon-icon {
     .intro-text {
         border-left: none;
         border-top: 5px solid var(--accent-color);
+        padding-left: 15px; /* Add left padding to text */
+        padding-right: 15px; /* Optional: Keep symmetrical padding */
     }
 }
-
-
-
