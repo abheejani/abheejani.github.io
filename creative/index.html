@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css"> <!-- reuse main styles -->
+  <style>
+    .project-item {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .project-item:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="portfolio-name">Abhee's Portfolio</div>
+    <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+        &#9776;
+    </div>
+    <div class="nav-links" id="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../assets/files/abheeresume.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/abheejani" target="_blank">LinkedIn</a>
+        <a href="https://github.com/abheejani/?tab=repositories" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <h1>Creative</h1>
+    <p>Welcome to Random Stuff</p>
+
+    <!-- Password form -->
+    <div id="login" style="text-align:center; margin-top:40px;">
+      <h2>Enter Password</h2>
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="checkPassword()">Submit</button>
+      <p id="error" style="color:red; display:none;">Incorrect password.</p>
+      <p style="margin-top:20px; color:gray;">🚧 Under construction, come back soon!</p>
+    </div>
+  </div>
+
+  <!-- Hidden content -->
+  <div id="content" style="display:none; margin-top:40px;">
+    <h2>Explore the Sections</h2>
+
+    <div class="projects">
+      <!-- Writing Section -->
+      <div class="project-item fade-in" onclick="location.href='writing.html'">
+        <h3>📖 Writing</h3>
+        <p>Drafts, short stories, and chapters from my book project.</p>
+      </div>
+
+      <!-- History Section -->
+      <div class="project-item fade-in" onclick="location.href='history.html'">
+        <h3>🏺 History</h3>
+        <p>Lore, timelines, and worldbuilding notes.</p>
+      </div>
+
+      <!-- Games Section -->
+      <div class="project-item fade-in" onclick="location.href='games.html'">
+        <h3>🎮 Games</h3>
+        <p>Interactive experiments, tricks, and mini-games inspired by my book.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      const correctPassword = "mypassword"; // 🔑 change this!
+      if (input === correctPassword) {
+        document.getElementById('login').style.display = "none";
+        document.getElementById('content').style.display = "block";
+      } else {
+        document.getElementById('error').style.display = "block";
+      }
+    }
+
+    // Enable "Enter" key to submit password
+    document.getElementById('password').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+  </script>
+  <script src="../js/script.js"></script>
+</body>
+</html>
