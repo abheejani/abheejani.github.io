@@ -125,31 +125,34 @@
   .content.project-item > h2 { padding: 0 0 16px 0; }
 }
 
-/* ===== Civilization Color Accents ===== */
-:root {
-  --color-sumer:     #c06060; /* brick red */
-  --color-egypt:     #e0b040; /* golden sand */
-  --color-indus:     #40a080; /* turquoise river */
-  --color-china:     #7080d0; /* jade blue */
-  --color-levant:    #d08040; /* ochre */
-  --color-anatolia:  #b070d0; /* purple stone */
-  --color-aegean:    #4682b4; /* sea blue */
-  --color-iran:      #a85f3f; /* copper brown */
-  --color-rome:      #a52a2a; /* imperial crimson */
-  --color-germanic:  #556b2f; /* dark olive (Celts/Germanics/Vikings) */
-  --color-steppe:    #8b4513; /* saddle brown (Huns/Mongols) */
-  --color-islam:     #008080; /* teal (Caliphates/Ottomans) */
-  --color-africa:    #daa520; /* goldenrod (Mali/West Africa) */
-  --color-americas:  #9c5d9c; /* mountain purple (Maya/Aztec/Inca) */
-  --color-europe:    #4169e1; /* royal blue (Spain/France/Britain) */
-  --color-usa:       #b22222; /* firebrick red (United States) */
-  --color-russia:    #2f4f4f; /* dark slate gray (Russia/USSR) */
-  --color-norse: #5f7a8d; /* steel gray-blue for Vikings */
-
-}
-
 .subgrid .subcard.project-item {
   border-left: 4px solid transparent; /* default */
+}
+
+:root {
+  /* Core Anchors (bright, high-contrast) */
+  --color-sumer:     #e63946; /* vivid brick red */
+  --color-egypt:     #ffbf00; /* bright golden sand */
+  --color-indus:     #00b894; /* bright turquoise */
+  --color-china:     #0984e3; /* strong jade blue */
+  --color-rome:      #d00000; /* bold imperial crimson */
+  --color-europe:    #1e40af; /* royal blue */
+
+  /* Long-but-secondary powers */
+  --color-levant:    #ff7f11; /* bright ochre orange */
+  --color-iran:      #8d5524; /* rich copper brown */
+  --color-islam:     #00897b; /* teal green */
+  --color-russia:    #374151; /* dark slate with contrast */
+  --color-usa:       #e63900; /* bright firebrick red */
+
+  /* Regionals / shorter-lived */
+  --color-anatolia:  #9b59b6; /* medium purple stone */
+  --color-aegean:    #2980b9; /* sea blue (duller than Europe) */
+  --color-germanic:  #556b2f; /* olive green (Celts/Germanics/Vikings) */
+  --color-steppe:    #a0522d; /* saddle brown (Huns/Mongols) */
+  --color-africa:    #daa520; /* goldenrod (Mali/West Africa) */
+  --color-americas:  #9c5d9c; /* muted mountain purple */
+  --color-norse:     #5f7a8d; /* steel gray-blue */
 }
 
 /* Civilization-specific accents */
@@ -170,9 +173,9 @@
 .civ-europe   { border-left-color: var(--color-europe); }
 .civ-usa      { border-left-color: var(--color-usa); }
 .civ-russia   { border-left-color: var(--color-russia); }
-.civ-norse   { border-left-color: var(--color-norse); }
+.civ-norse    { border-left-color: var(--color-norse); }
 
-/* Headings take the same hue */
+/* Headings pick up the same hue */
 .civ-sumer h4    { color: var(--color-sumer); }
 .civ-egypt h4    { color: var(--color-egypt); }
 .civ-indus h4    { color: var(--color-indus); }
@@ -190,4 +193,4 @@
 .civ-europe h4   { color: var(--color-europe); }
 .civ-usa h4      { color: var(--color-usa); }
 .civ-russia h4   { color: var(--color-russia); }
-.civ-norse h4 { color: var(--color-norse); }
+.civ-norse h4    { color: var(--color-norse); }
