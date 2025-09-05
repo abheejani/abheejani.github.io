@@ -144,6 +144,8 @@
   --color-europe:    #4169e1; /* royal blue (Spain/France/Britain) */
   --color-usa:       #b22222; /* firebrick red (United States) */
   --color-russia:    #2f4f4f; /* dark slate gray (Russia/USSR) */
+  --color-norse: #5f7a8d; /* steel gray-blue for Vikings */
+
 }
 
 .subgrid .subcard.project-item {
@@ -168,6 +170,7 @@
 .civ-europe   { border-left-color: var(--color-europe); }
 .civ-usa      { border-left-color: var(--color-usa); }
 .civ-russia   { border-left-color: var(--color-russia); }
+.civ-norse   { border-left-color: var(--color-norse); }
 
 /* Headings take the same hue */
 .civ-sumer h4    { color: var(--color-sumer); }
@@ -187,3 +190,4 @@
 .civ-europe h4   { color: var(--color-europe); }
 .civ-usa h4      { color: var(--color-usa); }
 .civ-russia h4   { color: var(--color-russia); }
+.civ-norse h4 { color: var(--color-norse); }
