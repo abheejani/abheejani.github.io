@@ -1,0 +1,189 @@
+/* ===== Timeline (scoped) ===== */
+:root {
+  --rail-w: 6px;              /* vertical rail thickness */
+  --dot: 22px;                /* inner circle size */
+  --dot-b: 4px;               /* dot border size */
+  --dot-total: calc(var(--dot) + 2 * var(--dot-b));
+  --dot-offset: calc((var(--dot-total) - var(--rail-w)) / 2);
+  --hook: 22px;               /* connector line length */
+  --timeline-max: 1200px;
+
+  --rail-gap: 96px;           /* distance between rail and text */
+  --col-gap: 56px;            /* horizontal gap between subcards */
+}
+
+/* Timeline wrapper */
+.timeline {
+  position: relative;
+  max-width: var(--timeline-max);
+  margin: 40px auto 90px;
+}
+
+/* Vertical rail */
+.timeline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--rail-w);
+  background: currentColor;
+  opacity: 0.25;
+  border-radius: 3px;
+  z-index: 0;
+}
+
+/* Entry container */
+.container {
+  position: relative;
+  width: 50%;
+  padding: 10px 40px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.left  { left: 0; }
+.right { left: 50%; }
+
+/* Era wrapper (no longer a card) */
+.content.project-item {
+  position: relative;
+  width: auto;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Era heading */
+.content.project-item > h2 {
+  margin: 0 0 16px;
+  padding: 0 24px;
+}
+
+/* Rail spacing for heading */
+.left  .content.project-item > h2 { padding-right: var(--rail-gap); }
+.right .content.project-item > h2 { padding-left:  var(--rail-gap); }
+
+/* Connector line for heading */
+.left  .content::before,
+.right .content::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.25;
+}
+.left  .content::before { right: calc(var(--rail-gap) * -1); width: var(--rail-gap); }
+.right .content::before { left:  calc(var(--rail-gap) * -1); width: var(--rail-gap); }
+
+/* Subgrid */
+.subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: 28px;
+  margin: 0 24px;
+  min-width: 0;
+  align-items: start;
+}
+
+/* Subcards as real cards */
+.subgrid .subcard.project-item {
+  display: block;
+  width: 100%;
+  max-width: none !important;
+  min-width: 0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);  /* subtle fill */
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 4px 8px rgba(0,0,0,.35);
+  margin: 0 !important;
+  white-space: normal;
+  overflow-wrap: break-word;
+  transform: none !important;  /* no hover-grow */
+}
+.subcard h4 { margin: 0 0 6px; font-size: 15px; }
+.subcard p  { margin: 0; line-height: 1.6; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .timeline::after { left: 31px; transform: none; }
+  .container {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  .container::after { left: 15px; right: auto; }
+  .content::before { left: -14px !important; right: auto !important; width: 14px; }
+  .subgrid { grid-template-columns: 1fr; margin: 0; }
+  .content.project-item > h2 { padding: 0 0 16px 0; }
+}
+
+/* ===== Civilization Color Accents ===== */
+:root {
+  --color-sumer:     #c06060; /* brick red */
+  --color-egypt:     #e0b040; /* golden sand */
+  --color-indus:     #40a080; /* turquoise river */
+  --color-china:     #7080d0; /* jade blue */
+  --color-levant:    #d08040; /* ochre */
+  --color-anatolia:  #b070d0; /* purple stone */
+  --color-aegean:    #4682b4; /* sea blue */
+  --color-iran:      #a85f3f; /* copper brown */
+  --color-rome:      #a52a2a; /* imperial crimson */
+  --color-germanic:  #556b2f; /* dark olive (Celts/Germanics/Vikings) */
+  --color-steppe:    #8b4513; /* saddle brown (Huns/Mongols) */
+  --color-islam:     #008080; /* teal (Caliphates/Ottomans) */
+  --color-africa:    #daa520; /* goldenrod (Mali/West Africa) */
+  --color-americas:  #9c5d9c; /* mountain purple (Maya/Aztec/Inca) */
+  --color-europe:    #4169e1; /* royal blue (Spain/France/Britain) */
+  --color-usa:       #b22222; /* firebrick red (United States) */
+  --color-russia:    #2f4f4f; /* dark slate gray (Russia/USSR) */
+}
+
+.subgrid .subcard.project-item {
+  border-left: 4px solid transparent; /* default */
+}
+
+/* Civilization-specific accents */
+.civ-sumer    { border-left-color: var(--color-sumer); }
+.civ-egypt    { border-left-color: var(--color-egypt); }
+.civ-indus    { border-left-color: var(--color-indus); }
+.civ-china    { border-left-color: var(--color-china); }
+.civ-levant   { border-left-color: var(--color-levant); }
+.civ-anatolia { border-left-color: var(--color-anatolia); }
+.civ-aegean   { border-left-color: var(--color-aegean); }
+.civ-iran     { border-left-color: var(--color-iran); }
+.civ-rome     { border-left-color: var(--color-rome); }
+.civ-germanic { border-left-color: var(--color-germanic); }
+.civ-steppe   { border-left-color: var(--color-steppe); }
+.civ-islam    { border-left-color: var(--color-islam); }
+.civ-africa   { border-left-color: var(--color-africa); }
+.civ-americas { border-left-color: var(--color-americas); }
+.civ-europe   { border-left-color: var(--color-europe); }
+.civ-usa      { border-left-color: var(--color-usa); }
+.civ-russia   { border-left-color: var(--color-russia); }
+
+/* Headings take the same hue */
+.civ-sumer h4    { color: var(--color-sumer); }
+.civ-egypt h4    { color: var(--color-egypt); }
+.civ-indus h4    { color: var(--color-indus); }
+.civ-china h4    { color: var(--color-china); }
+.civ-levant h4   { color: var(--color-levant); }
+.civ-anatolia h4 { color: var(--color-anatolia); }
+.civ-aegean h4   { color: var(--color-aegean); }
+.civ-iran h4     { color: var(--color-iran); }
+.civ-rome h4     { color: var(--color-rome); }
+.civ-germanic h4 { color: var(--color-germanic); }
+.civ-steppe h4   { color: var(--color-steppe); }
+.civ-islam h4    { color: var(--color-islam); }
+.civ-africa h4   { color: var(--color-africa); }
+.civ-americas h4 { color: var(--color-americas); }
+.civ-europe h4   { color: var(--color-europe); }
+.civ-usa h4      { color: var(--color-usa); }
+.civ-russia h4   { color: var(--color-russia); }
