@@ -1,192 +1,131 @@
-// Scroll Animation and Magic Card Trick Script
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Scroll Animation
-    const projectItems = document.querySelectorAll('.project-item');
+  // ── Dark mode ──
+  const checkbox = document.getElementById('checkbox');
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    checkbox.checked = true;
+  }
+  checkbox.addEventListener('change', function () {
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+  });
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, 100); // Adds a small delay to avoid flickering
-            } else {
-                setTimeout(() => {
-                    entry.target.classList.remove('visible');
-                }, 100); // Small delay for removing the class as well
-            }
-        });
-    }, { threshold: [0, 0.5, 1] }); // You can experiment with these values
-    
-
-    projectItems.forEach(item => {
-        observer.observe(item);
+  // ── Hamburger ──
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function () {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
     });
-
-    // Menu Toggle for Mobile View
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-
-    menuToggle.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
     });
+  }
 
-    // Add the event listener for the start button
-    const startButton = document.getElementById('startButton');
-    if (startButton) {
-        startButton.addEventListener('click', startGame);
-    }
-
-    // Dark Mode Toggle
-    const checkbox = document.getElementById('checkbox');
-    checkbox.addEventListener('change', function() {
-        document.body.classList.toggle('light-mode');
-        if (document.body.classList.contains('light-mode')) {
-            localStorage.setItem('theme', 'light');
-        } else {
-            localStorage.setItem('theme', 'dark');
-        }
+  // ── Scroll fade-in ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(function (el) { observer.observe(el); });
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        checkbox.checked = true;
-    }
+  // ── Magic card trick ──
+  const startBtn = document.getElementById('startButton');
+  if (startBtn) startBtn.addEventListener('click', startGame);
 });
 
-// Magic Card Trick JavaScript Code
-let game = {
-    deck: [],
-    rounds: 0,
-    maxRounds: 3,
-    columns: [],
-};
 
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
+// ── Magic Card Trick ──
+var game = { deck: [], rounds: 0, maxRounds: 3, columns: [] };
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
 }
 
 function startGame() {
-    const numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-    const suits = ["♥", "♦", "♠", "♣"];
-
-    let deck = [];
-    for (let suit of suits) {
-        for (let number of numbers) {
-            deck.push(number + " of " + suit);
-        }
-    }
-
-    deck = shuffle(deck);
-    game.deck = deck.slice(0, 21);
-    game.rounds = 0;
-
-    alert("Memorize one of the following cards and click on the column where your card is located.");
-
-    dealCards();
+  var numbers = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  var suits    = ["♥","♦","♠","♣"];
+  var deck = [];
+  suits.forEach(function(s) { numbers.forEach(function(n) { deck.push(n + ' ' + s); }); });
+  deck = shuffle(deck);
+  game.deck   = deck.slice(0, 21);
+  game.rounds = 0;
+  document.getElementById('instructions').innerText = 'Memorize one card, then click the column it appears in.';
+  dealCards();
 }
 
 function dealCards() {
-    game.rounds++;
-
-    let firstColumn = [];
-    let secondColumn = [];
-    let thirdColumn = [];
-
-    for (let i = 0; i < game.deck.length; i++) {
-        if (i % 3 === 0) {
-            firstColumn.push(game.deck[i]);
-        } else if (i % 3 === 1) {
-            secondColumn.push(game.deck[i]);
-        } else if (i % 3 === 2) {
-            thirdColumn.push(game.deck[i]);
-        }
-    }
-
-    game.columns = [firstColumn, secondColumn, thirdColumn];
-
-    displayColumns();
+  game.rounds++;
+  var cols = [[], [], []];
+  game.deck.forEach(function(card, i) { cols[i % 3].push(card); });
+  game.columns = cols;
+  displayColumns();
 }
 
 function displayColumns() {
-    const columnsContainer = document.getElementById('columnsContainer');
-    columnsContainer.innerHTML = '';
-
-    for (let i = 0; i < 3; i++) {
-        let columnDiv = document.createElement('div');
-        columnDiv.classList.add('column');
-        let columnTitle = document.createElement('div');
-        columnTitle.classList.add('column-title');
-        columnTitle.innerText = `Column ${i + 1}`;
-        columnDiv.appendChild(columnTitle);
-
-        let columnCards = game.columns[i];
-        for (let card of columnCards) {
-            let cardDiv = document.createElement('div');
-            cardDiv.classList.add('card');
-            cardDiv.innerText = card;
-            columnDiv.appendChild(cardDiv);
-        }
-
-        columnDiv.addEventListener('click', function() {
-            columnSelected(i);
-        });
-
-        columnsContainer.appendChild(columnDiv);
-    }
-
-    const instructions = document.getElementById('instructions');
-    if (game.rounds < game.maxRounds) {
-        instructions.innerText = `Round ${game.rounds}: Click on the column where your card is located. We will do this ${game.maxRounds - game.rounds} more time(s).`;
-    } else {
-        instructions.innerText = `Round ${game.rounds}: Click on the column where your card is located.`;
-    }
+  var container = document.getElementById('columnsContainer');
+  container.innerHTML = '';
+  game.columns.forEach(function(col, i) {
+    var div = document.createElement('div');
+    div.className = 'column';
+    var title = document.createElement('div');
+    title.className = 'column-title';
+    title.innerText = 'Column ' + (i + 1);
+    div.appendChild(title);
+    col.forEach(function(card) {
+      var c = document.createElement('div');
+      c.className = 'card';
+      c.innerText = card;
+      div.appendChild(c);
+    });
+    div.addEventListener('click', function() { columnSelected(i); });
+    container.appendChild(div);
+  });
+  var instr = document.getElementById('instructions');
+  if (game.rounds < game.maxRounds) {
+    instr.innerText = 'Round ' + game.rounds + ' of ' + game.maxRounds + ': click the column with your card.';
+  } else {
+    instr.innerText = 'Last round — click your column.';
+  }
 }
 
-function columnSelected(columnIndex) {
-    const selectedColumn = game.columns[columnIndex];
-
-    let newDeck = [];
-
-    if (columnIndex === 0) {
-        newDeck = game.columns[1].concat(game.columns[0], game.columns[2]);
-    } else if (columnIndex === 1) {
-        newDeck = game.columns[2].concat(game.columns[1], game.columns[0]);
-    } else if (columnIndex === 2) {
-        newDeck = game.columns[1].concat(game.columns[2], game.columns[0]);
-    }
-
-    game.deck = newDeck;
-
-    if (game.rounds < game.maxRounds) {
-        dealCards();
-    } else {
-        revealCard();
-    }
+function columnSelected(idx) {
+  var c = game.columns;
+  var newDeck;
+  if      (idx === 0) newDeck = c[1].concat(c[0], c[2]);
+  else if (idx === 1) newDeck = c[2].concat(c[1], c[0]);
+  else                newDeck = c[1].concat(c[2], c[0]);
+  game.deck = newDeck;
+  if (game.rounds < game.maxRounds) {
+    dealCards();
+  } else {
+    revealCard();
+  }
 }
 
 function revealCard() {
-    const columnsContainer = document.getElementById('columnsContainer');
-    columnsContainer.innerHTML = '';
-
-    const instructions = document.getElementById('instructions');
-    instructions.innerText = '';
-
-    const resultDiv = document.createElement('div');
-    resultDiv.innerText = `I figured it out! Your card was the ${game.deck[10]}.`;
-    resultDiv.style.fontSize = '18px';
-    resultDiv.style.marginBottom = '20px';
-
-    columnsContainer.appendChild(resultDiv);
+  document.getElementById('columnsContainer').innerHTML = '';
+  var instr = document.getElementById('instructions');
+  instr.innerHTML = '🎉 Your card was <strong>' + game.deck[10] + '</strong>.';
+  var again = document.createElement('button');
+  again.className = 'btn-magic';
+  again.innerText = 'Try Again';
+  again.style.marginTop = '0.75rem';
+  again.addEventListener('click', startGame);
+  document.getElementById('columnsContainer').appendChild(again);
 }

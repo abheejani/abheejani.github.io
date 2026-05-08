@@ -1,163 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhee's Portfolio</title>
-    <meta name="description" content="Abhee's Portfolio">
-    <meta name="author" content="Abhee Jani">
-
-    <!-- Link to the CSS file -->
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abhee Jani — Software Engineer</title>
+  <meta name="description" content="Abhee Jani — Software Engineer. Building full-stack products, exploring systems, and shipping real things.">
+  <meta name="author" content="Abhee Jani">
+  <meta property="og:title" content="Abhee Jani — Software Engineer">
+  <meta property="og:description" content="Software Engineer. Building full-stack products with Python, AWS, and more.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- Taskbar -->
-    <div class="navbar">
-        <div class="portfolio-name">Abhee's Portfolio</div>
-        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
-            &#9776;
-        </div>
-        <div class="nav-links" id="nav-links">
-            <a href="assets/files/abheeresume.pdf" target="_blank">Resume</a>
-            <a href="https://www.linkedin.com/in/abheejani" target="_blank">LinkedIn</a>
-            <a href="https://github.com/abheejani/?tab=repositories" target="_blank">GitHub</a>
-            <a href="creative/index.html">Creative</a>
-        </div>
+<!-- ── Nav ── -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Abhee Jani</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="assets/files/abheeresume.pdf" target="_blank" class="btn-nav-ghost">Resume</a>
+      <a href="https://github.com/abheejani" target="_blank" class="btn-nav-primary">GitHub</a>
+      <label class="theme-switch" for="checkbox" aria-label="Toggle dark mode">
+        <input type="checkbox" id="checkbox">
+        <div class="slider"><span class="sun">☀️</span><span class="moon">🌙</span></div>
+      </label>
+    </div>
+  </div>
+</nav>
 
+<!-- ── Hero ── -->
+<section class="hero" id="about">
+  <div class="hero-bg-blob"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">Available for opportunities</div>
+        <h1>Hi, I'm Abhee<span class="accent">.</span></h1>
+        <p class="hero-sub">Software engineer who builds things end-to-end — from kernel modules in C to full-stack web apps on AWS. Currently building <a href="https://scholarviews.com" target="_blank" class="inline-link">ScholarViews</a>, a peer-to-peer college prep platform.</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">See My Work</a>
+          <a href="https://www.linkedin.com/in/abheejani" target="_blank" class="btn-ghost">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="assets/images/photo.jpg" alt="Abhee Jani">
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Dark Mode Toggle Switch -->
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox">
-            <div class="slider round">
-                <span class="sun-icon">☀️</span>
-                <span class="moon-icon">🌙</span>
+<!-- ── About ── -->
+<section class="about-section">
+  <div class="container">
+    <div class="section-eyebrow">Background</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <p>Computer Engineering graduate from the University of Illinois at Urbana-Champaign, with a minor in Statistics. I've interned at Discover Financial Services working on AWS migrations, CI/CD automation, and Datadog monitoring.</p>
+      <p>Outside work I build projects that scratch real itches — route planners, flight analytics, operating systems, and now ScholarViews, a platform connecting high school students with college mentors for SAT prep, essay review, and college advising.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Skills ── -->
+<section class="skills-section" id="skills">
+  <div class="container">
+    <div class="section-eyebrow">Tech Stack</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-groups">
+      <div class="skills-group">
+        <div class="skills-group-label">Languages</div>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Java</span>
+          <span class="chip">C / C++</span>
+          <span class="chip">SQL</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">System Verilog</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <div class="skills-group-label">Frameworks & Libraries</div>
+        <div class="chips">
+          <span class="chip">Flask</span>
+          <span class="chip">React</span>
+          <span class="chip">SQLAlchemy</span>
+          <span class="chip">Stripe</span>
+          <span class="chip">Flask-Login</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <div class="skills-group-label">Infrastructure & Tools</div>
+        <div class="chips">
+          <span class="chip">AWS (ECS, RDS, ECR, ALB)</span>
+          <span class="chip">Docker</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Git</span>
+          <span class="chip">Datadog</span>
+          <span class="chip">CI/CD</span>
+          <span class="chip">Google OAuth</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Projects ── -->
+<section class="projects-section" id="projects">
+  <div class="container">
+    <div class="section-eyebrow">Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+
+      <!-- ScholarViews — FEATURED -->
+      <div class="project-card project-featured fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag tag-live">Live Product</span>
+              <span class="project-tag">Flask</span>
+              <span class="project-tag">AWS</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Stripe</span>
             </div>
-        </label>
-    </div>
-
-    <!-- Intro Section -->
-<div class="intro">
-    <h1>Abhee Jani | Software Engineer</h1>
-    <div class="intro-content">
-        <img src="assets/images/photo.jpg" alt="" class="intro-image">
-        <div class="intro-text">
-            <p>Hey there! I'm Abhee, a Computer Engineer with a minor in Statistics from the University of Illinois at Urbana-Champaign. I've recently interned at Discover Financial Services, where I dove into AWS migrations, automating testing in CI/CD pipelines, and improving monitoring with Datadog.</p>
-            <p>My journey so far has been a mix of exciting projects and valuable experiences. From building a full-stack web app called Flight Insight to analyzing baseball data and exploring game design, I've had the chance to work on a variety of interesting challenges. I love using my skills in Java, Python, C++, SQL, and AWS to solve problems and create innovative solutions.</p>
+            <h3>ScholarViews</h3>
+            <p>Peer-to-peer college prep platform connecting high school students with mentors from top universities. Built end-to-end — auth, booking, payments, Google Calendar integration, and deployed on AWS ECS with Fargate behind an ALB.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://scholarviews.com" target="_blank" class="btn-project-primary">Visit Site</a>
+            <a href="https://github.com/abheejani/scholarviews.com" target="_blank" class="btn-project-ghost">GitHub</a>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-
-    <!-- Featured Projects Section -->
-    <div class="projects">
-        <h2>Featured Projects</h2>
-
-        <!-- Project 1 -->
-        <div class="project-item fade-in">
+      <!-- Smart Stroll -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">C++</span>
+              <span class="project-tag">Graphs</span>
+              <span class="project-tag">Algorithms</span>
+            </div>
             <h3>Smart Stroll</h3>
-            <p>Created an optimized route planner using a custom graph-building algorithm and modified Dijkstra's algorithm. Implemented real-time landmark integration and route optimization based on user input.</p>
-            <a href="https://github.com/abheejani/SmartStroll" target="_blank"><u>GitHub Repo</u></a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/czH0t7QbRWs" frameborder="0" allowfullscreen></iframe>
+            <p>Optimized route planner using a custom graph-building algorithm and modified Dijkstra's. Real-time landmark integration and route optimization based on user preferences.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/SmartStroll" target="_blank" class="btn-project-ghost">GitHub</a>
+            <a href="https://www.youtube.com/watch?v=czH0t7QbRWs" target="_blank" class="btn-project-ghost">Demo</a>
+          </div>
         </div>
+      </div>
 
-        <!-- Project 2 -->
-        <div class="project-item fade-in">
-            <h3>Flight Insight</h3>
-            <p>Developed a full-stack application to analyze and visualize flight delay patterns using Python, Flask, React, and SQL.</p>
-            <a href="https://github.com/abheejani/FlightInsight" target="_blank"><u>GitHub Repo</u></a><br>
-            <img src="assets/images/flightinfo2.png" alt="Flight Insight Schema" style="width: 325px; height: auto;">
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-item fade-in">
-            <h3>Custom Linux-Based Operating System</h3>
-            <p>Built kernel modules in C, focusing on scheduling, memory management, synchronization, and file management. Implemented custom system calls for the operating system.</p>
-            <a href="https://github.com/abheejani/Linux-Operating-System" target="_blank"><u>Github Repo</u></a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/-ml_qpXYgsI" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-item fade-in">
-            <h3>FPGA Geo Dash</h3>
-            <p>Developed a custom version of the popular game Geometry Dash using System Verilog on FPGA hardware. Expanded on lab code by adding new levels and features.</p>
-            <a href="https://github.com/abheejani/FPGAGeoDash" target="_blank"><u>GitHub Repo</u></a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/3H4_XpCzrK0" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-item fade-in">
-            <h3>Situational Batter Metric</h3>
-            <p>This project is a Baseball Analytics Application that analyzes Statcast data to calculate and compare the average run expectancy for selected players based on game outcomes.</p>
-            <a href="https://github.com/abheejani/BatterMetricsAnalysis" target="_blank"><u>Github Repo</u></a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/jiJzU1U-W74" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="project-item fade-in">
-            <h3>Nano Photonics Scanning Interface</h3>
-            <p>Crafted a multithreaded Python interface for nanoparticle scanning, enhancing data acquisition rates. Replaced previous lab implementations, reducing scanning time and improving efficiency.</p>
-            <!-- <a href="https://github.com/abheejani/NanoPhotonicsLab" target="_blank"><u>NOT WORKING</u></a><br> -->
-
-            <!-- Image with caption -->
-            <figure style="width: 325px; margin: 0 auto; text-align: center;">
-                <img src="assets/images/researchPhoto.jpg" 
-                    alt="LabView vs Python Scanning" 
-                    style="width: 100%; height: auto;">
-
-                <figcaption style="font-size: 14px; margin-top: 5px; color: #555;">
-                    <I>LabView image scanning (left) compared with optimized Python scanning (right)</I>
-                </figcaption>
-            </figure>
-        </div>
-
-
-
-
-
-        <!-- Project 7 -->
-        <div class="project-item fade-in">
-            <h3>Sort Bot - ECE Honors Lab Project</h3>
-            <p>Created a robot using Google Vision API and a Raspberry Pi programmed to sort a pre-determined set of objects.</p>
-            <a href="assets/files/sortbotreport.pdf" target="_blank"><u>Project Report</u></a>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/M6XTartb0Kw" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Project 8 -->
-        <div class="project-item fade-in">
-            <h3>Snoozefest - 2D Game Development</h3>
-            <p>Developed "Snoozefest", a 2D game using Unreal Engine. Collaborated in a team to design and implement game mechanics, graphics, and user interactions.</p>
-            <a href="https://github.com/abheejani/Snoozefest" target="_blank"><u>Github Repo</u></a><br>
-            <img src="assets/images/snoozefest.png" 
-                alt="Snoozefest Game Screenshot" 
-                style="width: 100%; max-width: 560px; height: auto; object-fit: contain; display: block; margin: 0 auto;">
-        </div>
-
-
-        <!-- Magic Card Trick -->
-        <div class="project-item fade-in">
-            <h3>Magic Card Trick</h3>
-            <p>Experience a classic magic trick where I can guess your card after a few simple steps. Give it a try!</p>
-            <div id="cardTrickContainer" class="magic-game-container">
-                <button id="startButton">Start Magic Trick</button>
-                <div id="instructions" class="instructions"></div>
-                <div id="columnsContainer" class="columns"></div>
+      <!-- Flight Insight -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Flask</span>
+              <span class="project-tag">React</span>
+              <span class="project-tag">SQL</span>
             </div>
+            <h3>Flight Insight</h3>
+            <p>Full-stack application to analyze and visualize flight delay patterns. Built with Python, Flask, React, and SQL — features interactive charts and a normalized database schema.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/FlightInsight" target="_blank" class="btn-project-ghost">GitHub</a>
+          </div>
         </div>
+      </div>
+
+      <!-- Linux OS -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">C</span>
+              <span class="project-tag">Systems</span>
+              <span class="project-tag">Kernel</span>
+            </div>
+            <h3>Custom Linux-Based OS</h3>
+            <p>Built kernel modules in C covering scheduling, memory management, synchronization, and file management. Implemented custom system calls from scratch.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/Linux-Operating-System" target="_blank" class="btn-project-ghost">GitHub</a>
+            <a href="https://www.youtube.com/watch?v=-ml_qpXYgsI" target="_blank" class="btn-project-ghost">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FPGA Geo Dash -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">System Verilog</span>
+              <span class="project-tag">FPGA</span>
+              <span class="project-tag">Hardware</span>
+            </div>
+            <h3>FPGA Geo Dash</h3>
+            <p>Custom version of Geometry Dash implemented in System Verilog on FPGA hardware. Extended lab code with new levels, game mechanics, and VGA rendering.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/FPGAGeoDash" target="_blank" class="btn-project-ghost">GitHub</a>
+            <a href="https://www.youtube.com/watch?v=3H4_XpCzrK0" target="_blank" class="btn-project-ghost">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nano Photonics -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Multithreading</span>
+              <span class="project-tag">Research</span>
+            </div>
+            <h3>Nano Photonics Scanning Interface</h3>
+            <p>Multithreaded Python interface for nanoparticle scanning, replacing prior LabView implementation. Significantly reduced scanning time and improved data acquisition rates.</p>
+          </div>
+          <div class="project-links">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <img src="assets/images/researchPhoto.jpg" alt="LabView vs Python" style="width:100%;max-width:320px;border-radius:8px;margin-top:0.5rem;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Baseball Metrics -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Data Analysis</span>
+              <span class="project-tag">Statcast</span>
+            </div>
+            <h3>Situational Batter Metric</h3>
+            <p>Baseball analytics app that analyzes Statcast data to calculate and compare average run expectancy per player based on game situations and outcomes.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/BatterMetricsAnalysis" target="_blank" class="btn-project-ghost">GitHub</a>
+            <a href="https://www.youtube.com/watch?v=jiJzU1U-W74" target="_blank" class="btn-project-ghost">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sort Bot -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Raspberry Pi</span>
+              <span class="project-tag">Google Vision</span>
+            </div>
+            <h3>Sort Bot</h3>
+            <p>Robot using Google Vision API and a Raspberry Pi programmed to identify and sort a predefined set of objects. ECE Honors Lab capstone project.</p>
+          </div>
+          <div class="project-links">
+            <a href="assets/files/sortbotreport.pdf" target="_blank" class="btn-project-ghost">Report</a>
+            <a href="https://www.youtube.com/watch?v=M6XTartb0Kw" target="_blank" class="btn-project-ghost">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snoozefest -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag">Unreal Engine</span>
+              <span class="project-tag">Game Dev</span>
+              <span class="project-tag">Team Project</span>
+            </div>
+            <h3>Snoozefest</h3>
+            <p>2D game built in Unreal Engine. Collaborated in a team to design and implement game mechanics, graphics, level design, and user interactions.</p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/abheejani/Snoozefest" target="_blank" class="btn-project-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Magic Card Trick -->
+      <div class="project-card fade-in">
+        <div class="project-card-inner">
+          <div class="project-top">
+            <div class="project-tag-row">
+              <span class="project-tag tag-fun">Just for Fun</span>
+              <span class="project-tag">JavaScript</span>
+            </div>
+            <h3>Magic Card Trick</h3>
+            <p>A classic mathematical card trick — pick any card from 21, tell me which column it's in three times, and I'll name it. Give it a try.</p>
+            <div id="cardTrickContainer" class="magic-container">
+              <button id="startButton" class="btn-magic">Start Trick</button>
+              <div id="instructions" class="trick-instructions"></div>
+              <div id="columnsContainer" class="trick-columns"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <!-- Contact Information Section -->
-    <div class="contact">
-        <h2>Contact Information</h2>
-        <ul>
-            <li>Email: <a href="mailto:abheejani@gmail.com">abheejani@gmail.com</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/abheejani" target="_blank">abheejani</a></li>
-            <li>Phone: <a href="tel:+17323317179">+1 732-331-7179</a></li>
-        </ul>
+<!-- ── Contact ── -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <p class="contact-sub">Open to full-time roles, internships, and interesting projects.</p>
+    <div class="contact-links">
+      <a href="mailto:abheejani@gmail.com" class="contact-item">
+        <span class="contact-icon">✉</span>
+        <span>abheejani@gmail.com</span>
+      </a>
+      <a href="https://www.linkedin.com/in/abheejani" target="_blank" class="contact-item">
+        <span class="contact-icon">in</span>
+        <span>linkedin.com/in/abheejani</span>
+      </a>
+      <a href="https://github.com/abheejani" target="_blank" class="contact-item">
+        <span class="contact-icon">&#9651;</span>
+        <span>github.com/abheejani</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    <!-- Scroll Animation and Magic Trick Script -->
-    <script src="js/script.js"></script>
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 Abhee Jani. Built by hand.</p>
+  </div>
+</footer>
 
+<script src="js/script.js"></script>
 </body>
 </html>
