@@ -158,41 +158,51 @@ async function initFlipbook() {
 
     const pdf   = await pdfjsLib.getDocument(pdfUrl).promise;
     const total = pdf.numPages;
-    const dpr   = window.devicePixelRatio || 1;
-    const SCALE = 1.5 * dpr; // render at native display resolution
+    const dpr   = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x — 3x phones crash
+    const SCALE = 1.5 * dpr;
 
     // aspect ratio from first page
     const vp0   = (await pdf.getPage(1)).getViewport({ scale: 1 });
     const ratio = vp0.height / vp0.width;
     const W = 440, H = Math.round(W * ratio);
 
-    const pageEls = [];
+    const pageEls  = [];
+    const rendered = new Set();
 
-    for (let i = 1; i <= total; i++) {
-      textEl.textContent = `Loading page ${i} of ${total}…`;
-      fillEl.style.width  = `${(i / total) * 100}%`;
-
-      const page     = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: SCALE });
-
-      const canvas   = document.createElement('canvas');
-      canvas.width   = viewport.width;
-      canvas.height  = viewport.height;
-      // CSS size fills the StPageFlip page slot; physical pixels = DPR × that = crisp
+    async function renderPage(i) {
+      if (rendered.has(i)) return;
+      rendered.add(i);
+      const div  = pageEls[i - 1];
+      const page = await pdf.getPage(i);
+      const vp   = page.getViewport({ scale: SCALE });
+      const canvas = document.createElement('canvas');
+      canvas.width  = vp.width;
+      canvas.height = vp.height;
       canvas.style.cssText = 'width:100%;height:100%;display:block;';
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+      div.innerHTML = '';
+      div.appendChild(canvas);
+    }
 
-      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-
+    // create placeholder divs for all pages upfront
+    for (let i = 1; i <= total; i++) {
       const div = document.createElement('div');
       div.style.cssText = 'background:#fff;overflow:hidden;width:100%;height:100%;';
-      div.appendChild(canvas);
       containerEl.appendChild(div);
       pageEls.push(div);
     }
 
-    loadingEl.style.display    = 'none';
-    containerEl.style.display  = 'block';
-    controlsEl.style.display   = 'flex';
+    // only render first 6 pages before showing the book
+    const preload = Math.min(6, total);
+    for (let i = 1; i <= preload; i++) {
+      textEl.textContent = `Loading page ${i} of ${preload}…`;
+      fillEl.style.width = `${(i / preload) * 100}%`;
+      await renderPage(i);
+    }
+
+    loadingEl.style.display   = 'none';
+    containerEl.style.display = 'block';
+    controlsEl.style.display  = 'flex';
 
     const pageFlip = new St.PageFlip(containerEl, {
       width:  W, height: H,
@@ -204,8 +214,14 @@ async function initFlipbook() {
       mobileScrollSupport: false,
     });
 
-    // loadFromHTML uses the real canvas elements — no re-draw, no quality loss
     pageFlip.loadFromHTML(pageEls);
+
+    // render pages ahead of current position in the background
+    async function renderAhead(currentIdx) {
+      for (let i = currentIdx; i <= Math.min(currentIdx + 5, total); i++) {
+        await renderPage(i);
+      }
+    }
 
     function updateInfo() {
       const cur = pageFlip.getCurrentPageIndex() + 1;
@@ -213,8 +229,8 @@ async function initFlipbook() {
       pageInput.value = cur;
       pageTotal.textContent = `/ ${pageFlip.getPageCount()}`;
     }
-    pageFlip.on('flip', updateInfo);
-    pageFlip.on('init', updateInfo);
+    pageFlip.on('flip', (e) => { updateInfo(); renderAhead(e.data + 1); });
+    pageFlip.on('init', (e) => { updateInfo(); renderAhead(7); });
 
     prevBtn.addEventListener('click', () => pageFlip.flipPrev());
     nextBtn.addEventListener('click', () => pageFlip.flipNext());
