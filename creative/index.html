@@ -2,94 +2,169 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Creative Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/styles.css"> <!-- reuse main styles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creative — Abhee Jani</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
-    .project-item {
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .creative-lock {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
     }
-    .project-item:hover {
-      transform: scale(1.03);
+    .creative-lock h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .creative-lock input[type="password"] {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 0.75rem;
+    }
+    .creative-lock input[type="password"]:focus { border-color: var(--accent); }
+    .creative-lock button {
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      font-size: 0.875rem; font-weight: 700;
+      padding: 0.6rem 1.5rem; border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .creative-lock button:hover { background: var(--accent-dk); }
+    .creative-lock .lock-error {
+      color: #e05555;
+      font-size: 0.82rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .creative-lock .lock-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 1.25rem;
+    }
+    .creative-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .creative-card {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .creative-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(200,95,40,0.12);
+    }
+    .creative-card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .creative-card-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+    .creative-card-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    @media (max-width: 600px) {
+      .creative-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="portfolio-name">Abhee's Portfolio</div>
-    <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
-        &#9776;
-    </div>
-    <div class="nav-links" id="nav-links">
-        <a href="../index.html">Home</a>
-        <a href="../assets/files/abheeresume.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/abheejani" target="_blank">LinkedIn</a>
-        <a href="https://github.com/abheejani/?tab=repositories" target="_blank">GitHub</a>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">Abhee Jani</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../experience.html">Experience</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="index.html" class="active">Creative</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="../assets/files/Abhee_Jani_Resume.pdf" target="_blank" class="btn-nav-resume">&#8595; Resume</a>
+      <a href="https://github.com/abheejani" target="_blank" class="btn-nav-primary">GitHub</a>
     </div>
   </div>
+</nav>
 
-  <!-- Intro -->
-  <div class="intro">
-    <h1>Creative</h1>
-    <p>Welcome to Random Stuff</p>
+<div class="page-hero">
+  <div class="container">
+    <div class="section-eyebrow">Personal</div>
+    <h1 class="page-hero-title">Creative</h1>
+  </div>
+</div>
 
-    <!-- Password form -->
-    <div id="login" style="text-align:center; margin-top:40px;">
-      <h2>Enter Password</h2>
+<div class="page-body">
+  <div class="container">
+
+    <div id="login" class="creative-lock">
+      <h2>Enter password to continue</h2>
       <input type="password" id="password" placeholder="Password">
-      <button onclick="checkPassword()">Submit</button>
-      <p id="error" style="color:red; display:none;">Incorrect password.</p>
-      <p style="margin-top:20px; color:gray;">🚧 Under construction, come back soon!</p>
+      <br>
+      <button onclick="checkPassword()">Unlock</button>
+      <p class="lock-error" id="error">Incorrect password.</p>
+      <p class="lock-note">Under construction — check back soon.</p>
     </div>
-  </div>
 
-  <!-- Hidden content -->
-  <div id="content" style="display:none; margin-top:40px;">
-    <h2>Explore the Sections</h2>
-
-    <div class="projects">
-      <!-- Writing Section -->
-      <div class="project-item fade-in" onclick="location.href='writing.html'">
-        <h3>📖 Writing</h3>
-        <p>Short Stories, Novels, Entries, etc.</p>
-      </div>
-
-      <!-- History Section -->
-      <div class="project-item fade-in" onclick="location.href='history.html'">
-        <h3>🏺 History</h3>
-        <p>A Peek at Human Civilization</p>
-      </div>
-
-      <!-- Games Section -->
-      <div class="project-item fade-in" onclick="location.href='games.html'">
-        <h3>🎮 Games</h3>
-        <p>Interactive Games and tools</p>
+    <div id="content" style="display:none;">
+      <div class="creative-cards">
+        <div class="creative-card fade-in" onclick="location.href='writing.html'">
+          <div class="creative-card-icon">&#128216;</div>
+          <div class="creative-card-title">Writing</div>
+          <div class="creative-card-sub">Short stories, entries, fiction</div>
+        </div>
+        <div class="creative-card fade-in" onclick="location.href='history.html'">
+          <div class="creative-card-icon">&#127981;</div>
+          <div class="creative-card-title">History</div>
+          <div class="creative-card-sub">A peek at human civilization</div>
+        </div>
+        <div class="creative-card fade-in" onclick="location.href='games.html'">
+          <div class="creative-card-icon">&#127918;</div>
+          <div class="creative-card-title">Games</div>
+          <div class="creative-card-sub">Interactive tools and games</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('password').value;
-      const correctPassword = "mypassword"; // 🔑 change this!
-      if (input === correctPassword) {
-        document.getElementById('login').style.display = "none";
-        document.getElementById('content').style.display = "block";
-      } else {
-        document.getElementById('error').style.display = "block";
-      }
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 Abhee Jani</p>
+  </div>
+</footer>
+
+<script>
+  function checkPassword() {
+    const input = document.getElementById('password').value;
+    const correctPassword = "mypassword";
+    if (input === correctPassword) {
+      document.getElementById('login').style.display = "none";
+      document.getElementById('content').style.display = "block";
+    } else {
+      document.getElementById('error').style.display = "block";
     }
-
-    // Enable "Enter" key to submit password
-    document.getElementById('password').addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        checkPassword();
-      }
-    });
-  </script>
-  <script src="../js/script.js"></script>
+  }
+  document.getElementById('password').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+</script>
+<script src="../js/script.js"></script>
 </body>
 </html>

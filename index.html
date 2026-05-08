@@ -4,28 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Abhee Jani — Production Engineer at Meta</title>
-  <meta name="description" content="Abhee Jani — Production Engineer at Meta. MS CS @ Georgia Tech. Building systems at scale.">
+  <meta name="description" content="Abhee Jani — Production Engineer at Meta. MS CS @ Georgia Tech. Builder of systems.">
   <meta name="author" content="Abhee Jani">
   <meta property="og:title" content="Abhee Jani — Production Engineer at Meta">
-  <meta property="og:description" content="Production Engineer at Meta. MS CS @ Georgia Tech (Systems). Builder of things.">
+  <meta property="og:description" content="PE @ Meta. UIUC CS '25. Georgia Tech OMSCS.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- ── Nav ── -->
-<nav class="navbar" id="navbar">
+<nav class="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Abhee Jani</a>
+    <a href="index.html" class="nav-logo">Abhee Jani</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="creative/index.html">Creative</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
       <a href="assets/files/Abhee_Jani_Resume.pdf" target="_blank" class="btn-nav-resume">&#8595; Resume</a>
@@ -34,399 +32,55 @@
   </div>
 </nav>
 
-<!-- ── Hero ── -->
-<section class="hero">
+<section class="landing-hero">
   <div class="hero-bg-blob"></div>
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <h1>Hi, I'm Abhee</h1>
-        <p class="hero-sub">I build systems at scale. Currently a Production Engineer at Meta owning data center region turn-ups for 90+ services and shipping infrastructure that saves millions. Also building <a href="https://scholarviews.com" target="_blank" class="inline-link">ScholarViews</a> on the side.</p>
-        <div class="hero-ctas">
-          <a href="assets/files/Abhee_Jani_Resume.pdf" target="_blank" class="btn-primary">&#8595;&nbsp; Download Resume</a>
-          <a href="#experience" class="btn-ghost">View Experience</a>
-        </div>
-      </div>
-      <div class="hero-photo">
+    <div class="landing-inner">
+      <div class="landing-photo">
         <img src="assets/images/photo.jpg" alt="Abhee Jani">
       </div>
+      <div class="landing-text">
+        <h1>Abhee Jani</h1>
+        <div class="landing-title">Production Engineer @ Meta</div>
+        <p class="landing-bio">PE @ Meta building infra at scale. UIUC CS '25, Georgia Tech OMSCS. Previously at Discover and Capital One. I care about systems that are fast, reliable, and don't wake you up at 3am.</p>
+        <div class="landing-ctas">
+          <a href="assets/files/Abhee_Jani_Resume.pdf" target="_blank" class="btn-primary">&#8595;&nbsp; Resume</a>
+          <a href="https://www.linkedin.com/in/abheejani" target="_blank" class="btn-ghost">LinkedIn</a>
+          <a href="https://github.com/abheejani" target="_blank" class="btn-ghost">GitHub</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── Experience ── -->
-<section class="section" id="experience">
+<section class="landing-nav-section">
   <div class="container">
-    <div class="section-eyebrow">Work History</div>
-    <h2 class="section-title">Experience</h2>
-    <div class="timeline">
+    <div class="landing-cards">
 
-      <div class="timeline-item fade-in">
-        <div class="timeline-left">
-          <div class="timeline-dot"></div>
-          <img src="assets/logos/meta.png" class="company-logo-img" alt="Meta">
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-header">
-            <div>
-              <div class="job-company">Meta Platforms</div>
-              <div class="job-title">Production Engineer</div>
-            </div>
-            <div class="job-meta">
-              <span class="job-date">Apr 2025 – Present</span>
-              <span class="job-location">New York, NY</span>
-            </div>
-          </div>
-          <ul class="job-bullets">
-            <li>Owned new data center region turn-ups for <strong>90+ Meta Recommendation Systems (MRS) services</strong> across 5 regions, coordinating 10+ cross-functional oncall teams and reducing turn-up completion time from <strong>7 to 2 days</strong>.</li>
-            <li>Built Claude skills and CLI automations to formalize MRS infrastructure turn-up runbook execution, reducing engineering hours from <strong>2 days to a few hours</strong>.</li>
-            <li>Designed and deployed real-time performance variability detectors and reservation capacity monitoring pipelines — savings of <strong>over $10M</strong> in operational expense.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-left">
-          <div class="timeline-dot"></div>
-          <img src="assets/logos/discover.png" class="company-logo-img" alt="Discover">
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-header">
-            <div>
-              <div class="job-company">Discover Financial Services</div>
-              <div class="job-title">Software Engineer · Business Technology Intern</div>
-            </div>
-            <div class="job-meta">
-              <span class="job-date">Jun 2024 – Apr 2025</span>
-              <span class="job-location">Riverwoods, IL</span>
-            </div>
-          </div>
-          <ul class="job-bullets">
-            <li>Transitioned legacy cloud services to modern infrastructure, increasing service reliability by <strong>over 75%</strong> for customer credit services.</li>
-            <li>Led migration of <strong>3 production services</strong> to OpenShift using Java and AWS technologies.</li>
-            <li>Modernized monitoring and alerting by transitioning from AppDynamics to Datadog; provisioned third-party tools via Jenkins CI/CD.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-left">
-          <div class="timeline-dot"></div>
-          <img src="assets/logos/abbott.png" class="company-logo-img" alt="Abbott">
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-header">
-            <div>
-              <div class="job-company">Abbott Laboratories</div>
-              <div class="job-title">Software Solutions Intern</div>
-            </div>
-            <div class="job-meta">
-              <span class="job-date">Jun 2023 – May 2024</span>
-              <span class="job-location">Champaign, IL</span>
-            </div>
-          </div>
-          <ul class="job-bullets">
-            <li>Built a Python-based database management system using optimized SQL queries, enhancing procurement data retrieval by <strong>50%</strong>.</li>
-            <li>Enhanced document management for <strong>300+ users</strong> via SharePoint and Power BI integrations.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-left">
-          <div class="timeline-dot"></div>
-          <img src="assets/logos/uiuc.png" class="company-logo-img" alt="UIUC">
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-header">
-            <div>
-              <div class="job-company">Quantum & Nano-Photonics Lab, UIUC</div>
-              <div class="job-title">Research Assistant</div>
-            </div>
-            <div class="job-meta">
-              <span class="job-date">Sep 2022 – Dec 2024</span>
-              <span class="job-location">Champaign, IL</span>
-            </div>
-          </div>
-          <ul class="job-bullets">
-            <li>Built multithreaded Python interface for nanoparticle scanning, improving data acquisition rates by <strong>20%</strong>.</li>
-            <li>Developed integration modules for E-712 Digital Piezo Controllers and single-photon detectors, transitioning from LabVIEW and optimizing data pipelines by <strong>40%</strong>.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Education ── -->
-<section class="section section-alt" id="education">
-  <div class="container">
-    <div class="section-eyebrow">Academic Background</div>
-    <h2 class="section-title">Education</h2>
-    <div class="edu-grid">
-
-      <div class="edu-card fade-in">
-        <div class="edu-school-row">
-          <img src="assets/logos/georgiatech.png" class="company-logo-img" alt="Georgia Tech">
-          <div>
-            <div class="edu-school">Georgia Institute of Technology</div>
-            <div class="edu-degree">M.S. Computer Science — Systems Track</div>
-          </div>
-          <div class="edu-right">
-            <span class="edu-date">Aug 2025 – Present</span>
-            <span class="edu-gpa">GPA 4.0</span>
-          </div>
-        </div>
-        <div class="edu-courses">
-          <span class="edu-course-label">Coursework:</span>
-          Grad Introduction to Operating Systems · Robotics AI Techniques · Intro to Information Security
-        </div>
-      </div>
-
-      <div class="edu-card fade-in">
-        <div class="edu-school-row">
-          <img src="assets/logos/uiuc.png" class="company-logo-img" alt="UIUC">
-          <div>
-            <div class="edu-school">University of Illinois at Urbana-Champaign</div>
-            <div class="edu-degree">B.S. Computer Engineering · Minor in Statistics</div>
-          </div>
-          <div class="edu-right">
-            <span class="edu-date">Aug 2021 – Dec 2024</span>
-            <span class="edu-gpa">GPA 3.7</span>
-          </div>
-        </div>
-        <div class="edu-courses">
-          <span class="edu-course-label">Coursework:</span>
-          Intro to AI · Data Structures · Operating Systems · Database Systems · Algorithms · Computer Systems
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Projects ── -->
-<section class="section" id="projects">
-  <div class="container">
-    <div class="section-eyebrow">Work</div>
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card project-featured fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag tag-live">Live Product</span>
-              <span class="project-tag">Flask</span>
-              <span class="project-tag">AWS ECS</span>
-              <span class="project-tag">PostgreSQL</span>
-              <span class="project-tag">Stripe</span>
-              <span class="project-tag">Google OAuth</span>
-            </div>
-            <h3>ScholarViews</h3>
-            <p>Peer-to-peer college prep platform connecting high school students with mentors from top universities. Built end-to-end — auth, booking, Stripe payments, Google Calendar Meet integration, deployed on AWS ECS Fargate with ALB and RDS.</p>
-          </div>
-          <div class="project-links">
-            <a href="https://scholarviews.com" target="_blank" class="btn-project-primary">Visit Site</a>
-            <a href="https://github.com/abheejani/scholarviews.com" target="_blank" class="btn-project-ghost">GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Graphs</span>
-              <span class="project-tag">GCP Maps</span>
-            </div>
-            <h3>Smart Stroll</h3>
-            <p>Optimized route planner using a custom graph-building algorithm and modified Dijkstra's. Real-time landmark integration and route optimization using GCP map tools.</p>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/abheejani/SmartStroll" target="_blank" class="btn-project-ghost">GitHub</a>
-            <a href="https://www.youtube.com/watch?v=czH0t7QbRWs" target="_blank" class="btn-project-ghost">Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Flask</span>
-              <span class="project-tag">React</span>
-              <span class="project-tag">SQL</span>
-            </div>
-            <h3>Flight Insight</h3>
-            <p>Full-stack application to analyze and visualize flight delay patterns. Built with Python, Flask, React, and SQL — interactive charts and normalized database schema.</p>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/abheejani/FlightInsight" target="_blank" class="btn-project-ghost">GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag">C</span>
-              <span class="project-tag">Kernel</span>
-              <span class="project-tag">Systems</span>
-            </div>
-            <h3>Custom Linux-Based OS</h3>
-            <p>Kernel modules in C covering scheduling, memory management, synchronization, and file management. Custom system calls and optimized device drivers.</p>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/abheejani/Linux-Operating-System" target="_blank" class="btn-project-ghost">GitHub</a>
-            <a href="https://www.youtube.com/watch?v=-ml_qpXYgsI" target="_blank" class="btn-project-ghost">Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag">System Verilog</span>
-              <span class="project-tag">FPGA</span>
-              <span class="project-tag">Hardware</span>
-            </div>
-            <h3>FPGA Geo Dash</h3>
-            <p>Custom Geometry Dash in System Verilog on FPGA hardware. Extended lab code with new levels, game mechanics, and VGA rendering pipeline.</p>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/abheejani/FPGAGeoDash" target="_blank" class="btn-project-ghost">GitHub</a>
-            <a href="https://www.youtube.com/watch?v=3H4_XpCzrK0" target="_blank" class="btn-project-ghost">Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Raspberry Pi</span>
-              <span class="project-tag">Google Vision</span>
-            </div>
-            <h3>Sort Bot</h3>
-            <p>Robot using Google Vision API and Raspberry Pi to identify and sort objects. ECE Honors Lab capstone project.</p>
-          </div>
-          <div class="project-links">
-            <a href="assets/files/sortbotreport.pdf" target="_blank" class="btn-project-ghost">Report</a>
-            <a href="https://www.youtube.com/watch?v=M6XTartb0Kw" target="_blank" class="btn-project-ghost">Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-inner">
-          <div class="project-top">
-            <div class="project-tag-row">
-              <span class="project-tag tag-fun">Just for Fun</span>
-              <span class="project-tag">JavaScript</span>
-            </div>
-            <h3>Magic Card Trick</h3>
-            <p>A classic mathematical card trick. Pick any card from 21, tell me the column three times — I'll name it.</p>
-            <div id="cardTrickContainer" class="magic-container">
-              <button id="startButton" class="btn-magic">Start Trick</button>
-              <div id="instructions" class="trick-instructions"></div>
-              <div id="columnsContainer" class="trick-columns"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Skills ── -->
-<section class="section section-alt" id="skills">
-  <div class="container">
-    <div class="section-eyebrow">Tech Stack</div>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-groups">
-      <div class="skills-group">
-        <div class="skills-group-label">Languages</div>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">C / C++</span>
-          <span class="chip">Java</span>
-          <span class="chip">SQL</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Bash</span>
-          <span class="chip">HTML / CSS</span>
-          <span class="chip">System Verilog</span>
-        </div>
-      </div>
-      <div class="skills-group">
-        <div class="skills-group-label">Frameworks & Libraries</div>
-        <div class="chips">
-          <span class="chip">Flask</span>
-          <span class="chip">Django</span>
-          <span class="chip">React</span>
-          <span class="chip">Node.js</span>
-          <span class="chip">Spring Boot</span>
-          <span class="chip">PyTorch</span>
-          <span class="chip">TensorFlow</span>
-          <span class="chip">NumPy</span>
-          <span class="chip">Pandas</span>
-          <span class="chip">SQLAlchemy</span>
-          <span class="chip">Stripe</span>
-        </div>
-      </div>
-      <div class="skills-group">
-        <div class="skills-group-label">Infrastructure & Tools</div>
-        <div class="chips">
-          <span class="chip">AWS (ECS, RDS, ECR, ALB)</span>
-          <span class="chip">GCP</span>
-          <span class="chip">Docker</span>
-          <span class="chip">Kubernetes</span>
-          <span class="chip">OpenShift</span>
-          <span class="chip">Jenkins</span>
-          <span class="chip">CI/CD Pipelines</span>
-          <span class="chip">Datadog</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">Git</span>
-          <span class="chip">Linux</span>
-          <span class="chip">Real-Time Data Pipelines</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resume CTA -->
-    <div class="resume-cta">
-      <p>Want the full picture?</p>
-      <a href="assets/files/Abhee_Jani_Resume.pdf" target="_blank" class="btn-primary">&#8595;&nbsp; Download My Resume</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Contact ── -->
-<section class="section" id="contact">
-  <div class="container contact-container">
-    <div class="section-eyebrow">Get in Touch</div>
-    <h2 class="section-title">Contact</h2>
-    <p class="contact-sub">Open to interesting conversations, collaborations, and opportunities.</p>
-    <div class="contact-links">
-      <a href="mailto:abheejani@gmail.com" class="contact-item">
-        <span class="contact-icon">✉</span>
-        <span>abheejani@gmail.com</span>
+      <a href="experience.html" class="landing-card">
+        <div class="landing-card-icon">&#128188;</div>
+        <div class="landing-card-title">Experience</div>
+        <div class="landing-card-sub">Meta · Discover · Abbott · Research</div>
       </a>
-      <a href="https://www.linkedin.com/in/abheejani" target="_blank" class="contact-item">
-        <span class="contact-icon">in</span>
-        <span>linkedin.com/in/abheejani</span>
+
+      <a href="projects.html" class="landing-card">
+        <div class="landing-card-icon">&#9881;</div>
+        <div class="landing-card-title">Projects</div>
+        <div class="landing-card-sub">ScholarViews · OS · Flight Insight · more</div>
       </a>
-      <a href="https://github.com/abheejani" target="_blank" class="contact-item">
-        <span class="contact-icon">&#9651;</span>
-        <span>github.com/abheejani</span>
+
+      <a href="creative/index.html" class="landing-card">
+        <div class="landing-card-icon">&#9998;</div>
+        <div class="landing-card-title">Creative</div>
+        <div class="landing-card-sub">Writing · History · Games</div>
       </a>
+
+      <a href="contact.html" class="landing-card">
+        <div class="landing-card-icon">&#9993;</div>
+        <div class="landing-card-title">Contact</div>
+        <div class="landing-card-sub">abheejani@gmail.com</div>
+      </a>
+
     </div>
   </div>
 </section>
