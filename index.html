@@ -85,6 +85,42 @@
   </div>
 </section>
 
+<section class="book-section">
+  <div class="container">
+    <div class="section-eyebrow">I Wrote a Book 😊</div>
+    <div class="book-card">
+      <div class="book-spine"></div>
+      <div class="book-content">
+        <div class="book-header">
+          <div>
+            <div class="book-tag-row">
+              <span class="book-tag">Novel</span>
+              <span class="book-tag">First Draft</span>
+              <span class="book-tag">Fantasy</span>
+            </div>
+            <h2 class="book-title">Tales of Endridge</h2>
+            <p class="book-desc">A fantasy manuscript in progress — worlds, characters, and stories built from scratch.</p>
+          </div>
+          <a href="assets/files/tales_of_endridge.pdf" target="_blank" class="book-fullscreen">Open PDF &rarr;</a>
+        </div>
+        <div id="book-loading" class="book-loading" style="display:none;">
+          <div class="book-loading-bar"><div id="book-loading-fill" class="book-loading-fill"></div></div>
+          <span id="book-loading-text">Loading book...</span>
+        </div>
+        <div id="book-flip-container" class="book-flip-container" style="display:none;"></div>
+        <div id="book-controls" class="book-controls" style="display:none;">
+          <button id="book-prev" class="book-btn">&#8592; Prev</button>
+          <div class="book-page-info">
+            <input id="book-page-input" class="book-page-input" type="number" min="1" value="1">
+            <span id="book-page-total" class="book-page-total">/ 1</span>
+          </div>
+          <button id="book-next" class="book-btn">Next &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <p>&#169; 2026 Abhee Jani</p>
@@ -92,5 +128,122 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+const bookObserver = new IntersectionObserver(async (entries, obs) => {
+  if (entries[0].isIntersecting) {
+    obs.disconnect();
+    document.getElementById('book-loading').style.display = 'block';
+    await initFlipbook();
+  }
+}, { rootMargin: '200px' });
+bookObserver.observe(document.querySelector('.book-section'));
+
+async function initFlipbook() {
+  const pdfUrl      = 'assets/files/tales_of_endridge.pdf';
+  const loadingEl   = document.getElementById('book-loading');
+  const fillEl      = document.getElementById('book-loading-fill');
+  const textEl      = document.getElementById('book-loading-text');
+  const containerEl = document.getElementById('book-flip-container');
+  const controlsEl  = document.getElementById('book-controls');
+  const prevBtn     = document.getElementById('book-prev');
+  const nextBtn     = document.getElementById('book-next');
+  const pageInput   = document.getElementById('book-page-input');
+  const pageTotal   = document.getElementById('book-page-total');
+
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const pdf   = await pdfjsLib.getDocument(pdfUrl).promise;
+    const total = pdf.numPages;
+    const dpr   = window.devicePixelRatio || 1;
+    const SCALE = 1.5 * dpr; // render at native display resolution
+
+    // aspect ratio from first page
+    const vp0   = (await pdf.getPage(1)).getViewport({ scale: 1 });
+    const ratio = vp0.height / vp0.width;
+    const W = 440, H = Math.round(W * ratio);
+
+    const pageEls = [];
+
+    for (let i = 1; i <= total; i++) {
+      textEl.textContent = `Loading page ${i} of ${total}…`;
+      fillEl.style.width  = `${(i / total) * 100}%`;
+
+      const page     = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale: SCALE });
+
+      const canvas   = document.createElement('canvas');
+      canvas.width   = viewport.width;
+      canvas.height  = viewport.height;
+      // CSS size fills the StPageFlip page slot; physical pixels = DPR × that = crisp
+      canvas.style.cssText = 'width:100%;height:100%;display:block;';
+
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+      const div = document.createElement('div');
+      div.style.cssText = 'background:#fff;overflow:hidden;width:100%;height:100%;';
+      div.appendChild(canvas);
+      containerEl.appendChild(div);
+      pageEls.push(div);
+    }
+
+    loadingEl.style.display    = 'none';
+    containerEl.style.display  = 'block';
+    controlsEl.style.display   = 'flex';
+
+    const pageFlip = new St.PageFlip(containerEl, {
+      width:  W, height: H,
+      size:   'stretch',
+      minWidth: 180, maxWidth: 520,
+      minHeight: 240, maxHeight: 800,
+      drawShadow: true, flippingTime: 650,
+      usePortrait: true, showCover: true,
+      mobileScrollSupport: false,
+    });
+
+    // loadFromHTML uses the real canvas elements — no re-draw, no quality loss
+    pageFlip.loadFromHTML(pageEls);
+
+    function updateInfo() {
+      const cur = pageFlip.getCurrentPageIndex() + 1;
+      pageInput.max   = pageFlip.getPageCount();
+      pageInput.value = cur;
+      pageTotal.textContent = `/ ${pageFlip.getPageCount()}`;
+    }
+    pageFlip.on('flip', updateInfo);
+    pageFlip.on('init', updateInfo);
+
+    prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+    nextBtn.addEventListener('click', () => pageFlip.flipNext());
+
+    function jumpToPage() {
+      const target = parseInt(pageInput.value, 10) - 1;
+      const max    = pageFlip.getPageCount() - 1;
+      if (!isNaN(target) && target >= 0 && target <= max) {
+        pageFlip.turnToPage(target);
+      } else {
+        pageInput.value = pageFlip.getCurrentPageIndex() + 1;
+      }
+    }
+    pageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); jumpToPage(); pageInput.blur(); }
+    });
+    pageInput.addEventListener('blur', jumpToPage);
+
+    document.addEventListener('keydown', (e) => {
+      if (document.activeElement === pageInput) return;
+      if (e.key === 'ArrowRight') pageFlip.flipNext();
+      if (e.key === 'ArrowLeft')  pageFlip.flipPrev();
+    });
+
+  } catch (err) {
+    loadingEl.innerHTML = '<span style="color:var(--text-muted)">Could not load book.</span>';
+    console.error('Flipbook error:', err);
+  }
+}
+</script>
 </body>
 </html>
