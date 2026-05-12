@@ -830,7 +830,7 @@ function esc(s) {
 
 // ── GITHUB GIST CONFIG ───────────────────────────────────────────────────────
 function getToken()  { return localStorage.getItem('gh_token') || ''; }
-function getGistId() { return localStorage.getItem('gh_gist_id') || ''; }
+function getGistId() { return localStorage.getItem('gh_gist_id') || KNOWN_GIST_ID; }
 
 function ghHeaders() {
   return {
@@ -1975,6 +1975,7 @@ async function startApp() {
 var ALLOWED_EMAIL  = "abheejani@gmail.com";
 var GAUTH_CLIENT   = "621546837256-rpt8ve00tlkihcsdfn1df4mrgogdpvgq.apps.googleusercontent.com";
 var AUTH_STORE_KEY = "fun_authed_exp";
+var KNOWN_GIST_ID = "6a184a7fa35de913449e195071a14e2f";
 
 function isAuthed() {
   return Date.now() < parseInt(localStorage.getItem(AUTH_STORE_KEY) || "0", 10);
