@@ -930,8 +930,9 @@ async function writeToGist() {
   // Also persist to localStorage as cache
   Object.keys(appState).forEach(function(k) { lsSet(k, appState[k]); });
   try {
+    var ts = parseInt(localStorage.getItem('fun_lastModified') || Date.now(), 10);
     var body = JSON.stringify({
-      files: { 'fun-state.json': { content: JSON.stringify(appState) } }
+      files: { 'fun-state.json': { content: JSON.stringify(Object.assign({}, appState, {_lastModified: ts})) } }
     });
     var res = await fetch('https://api.github.com/gists/' + gistId, {
       method: 'PATCH', headers: ghHeaders(), body: body
@@ -951,8 +952,9 @@ async function writeToGist() {
 // ── DEBOUNCED SAVE ───────────────────────────────────────────────────────────
 async function saveState(key, data) {
   appState[key] = data;
-  lsSet(key, data);      // persist to localStorage immediately — survives refresh
-  localDirty = true;     // block Gist fetch from overwriting this pending change
+  lsSet(key, data);                        // persist immediately — survives refresh
+  localStorage.setItem('fun_lastModified', Date.now()); // timestamp for conflict resolution
+  localDirty = true;
   clearTimeout(saveTimer);
   saveTimer = setTimeout(function() { localDirty = false; writeToGist(); }, 300);
 }
@@ -1248,13 +1250,17 @@ async function fetchFromGist() {
       var data = await res.json();
       var fileContent = data.files && data.files['fun-state.json'] && data.files['fun-state.json'].content;
       if (fileContent && !localDirty) {
-        // Only apply Gist data if no local changes are pending — prevents overwriting unsaved edits
         var gistData = JSON.parse(fileContent);
-        applyStoredData(gistData);
-        // Update localStorage cache with fresh Gist data
-        Object.keys(appState).forEach(function(k) { lsSet(k, appState[k]); });
-        // Re-render all visible panels with fresh data
-        reRenderAll();
+        var gistTs  = gistData._lastModified || 0;
+        var localTs = parseInt(localStorage.getItem('fun_lastModified') || '0', 10);
+        if (gistTs >= localTs) {
+          // Gist is same age or newer — apply it (handles cross-device sync)
+          applyStoredData(gistData);
+          Object.keys(appState).forEach(function(k) { lsSet(k, appState[k]); });
+          localStorage.setItem('fun_lastModified', gistTs);
+          reRenderAll();
+        }
+        // else: local is newer — keep local, skip Gist overwrite
       }
       showSync('Synced ✓', 'synced');
       hideSync(2000);
