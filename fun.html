@@ -1744,28 +1744,16 @@ function showSetupModal() {
   overlay.innerHTML = [
     '<div id="setup-card">',
     '  <h2>Connect to GitHub</h2>',
-    '  <p>Your state will sync across all devices via a private GitHub Gist.</p>',
+    '  <p>Enter your GitHub token to sync your dashboard across devices.</p>',
     '  <input class="input" id="setup-token-input" type="password" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">',
     '  <div id="setup-help">Create a token at <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a> with <strong>gist</strong> scope only</div>',
-    '  <div id="setup-existing-wrap">',
-    '    <label>Existing Gist ID (for second device setup)</label>',
-    '    <input class="input" id="setup-gistid-input" placeholder="Paste Gist ID…" autocomplete="off">',
-    '  </div>',
     '  <button class="btn btn-primary" id="setup-connect-btn" style="width:100%;justify-content:center;margin-top:8px;">Connect</button>',
     '  <div id="setup-error"></div>',
-    '  <div style="text-align:center;margin-top:14px;">',
-    '    <button id="setup-existing-toggle">Already have a Gist ID?</button>',
-    '  </div>',
     '</div>'
   ].join('');
   document.body.appendChild(overlay);
 
-  var toggleShown = false;
-  document.getElementById('setup-existing-toggle').addEventListener('click', function() {
-    toggleShown = !toggleShown;
-    document.getElementById('setup-existing-wrap').style.display = toggleShown ? 'block' : 'none';
-    this.textContent = toggleShown ? 'Hide Gist ID field' : 'Already have a Gist ID?';
-  });
+
 
   document.getElementById('setup-connect-btn').addEventListener('click', async function() {
     var btn = this;
@@ -1788,36 +1776,12 @@ function showSetupModal() {
     btn.disabled = true;
 
     try {
-      var gistId;
-      if (existingGistId) {
-        // Verify the existing gist is accessible
-        var checkRes = await fetch('https://api.github.com/gists/' + existingGistId, {
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/vnd.github+json'
-          }
-        });
-        if (!checkRes.ok) throw new Error('Gist not found or inaccessible');
-        gistId = existingGistId;
-      } else {
-        // Create a new private gist
-        var createRes = await fetch('https://api.github.com/gists', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/vnd.github+json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            description: 'fun-dashboard-state',
-            public: false,
-            files: { 'fun-state.json': { content: '{}' } }
-          })
-        });
-        if (!createRes.ok) throw new Error('Could not create Gist');
-        var created = await createRes.json();
-        gistId = created.id;
-      }
+      // Verify the known Gist is accessible with this token
+      var gistId = KNOWN_GIST_ID;
+      var checkRes = await fetch('https://api.github.com/gists/' + gistId, {
+        headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+      });
+      if (!checkRes.ok) throw new Error('Token valid but could not reach the Gist — check token has gist scope');
 
       localStorage.setItem('gh_token', token);
       localStorage.setItem('gh_gist_id', gistId);
