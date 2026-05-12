@@ -589,6 +589,17 @@
   #sync-status.saved { color: var(--green); }
   #sync-status.syncing { color: var(--teal); }
   #sync-status.synced { color: var(--green); }
+  #sync-status.error { color: #ff453a; }
+  #resync-btn {
+    background: none; border: none; color: var(--text-secondary);
+    font-size: 14px; cursor: pointer; padding: 2px 4px; line-height: 1;
+    opacity: 0.5; transition: opacity 0.2s, transform 0.3s;
+    display: none;
+  }
+  #resync-btn:hover { opacity: 1; }
+  #resync-btn.spinning { display: inline-block; animation: spin 1s linear infinite; }
+  #resync-btn.visible { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   /* ── Google Auth Gate ── */
   #auth-gate {
     position: fixed; inset: 0; z-index: 9999;
@@ -607,6 +618,46 @@
   #auth-card p { font-size: 14px; color: #6b6760; margin-bottom: 32px; line-height: 1.5; }
   #auth-card .g-signin-wrap { display: flex; justify-content: center; }
   #auth-error { color: #ff453a; font-size: 13px; margin-top: 16px; display: none; }
+
+
+  #account-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    border-radius: 100px; padding: 4px 12px 4px 4px;
+    cursor: pointer; color: var(--text); font-size: 13px; font-weight: 500;
+    font-family: inherit; transition: background 0.2s;
+  }
+  #account-btn:hover { background: rgba(255,255,255,0.1); }
+  #account-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    object-fit: cover; display: block;
+  }
+  #account-avatar-fallback {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #account-popover {
+    position: absolute; top: 52px; right: 12px;
+    background: #1c1c1e; border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px; min-width: 220px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 500;
+    display: none;
+  }
+  #account-popover.open { display: block; }
+  #account-popover .acct-email {
+    font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 14px; word-break: break-all;
+  }
+  #account-popover .acct-email strong { display: block; color: var(--text); font-size: 14px; margin-bottom: 2px; }
+  #signout-btn {
+    width: 100%; padding: 8px; border-radius: 8px;
+    background: rgba(255,69,58,0.12); border: none;
+    color: #ff453a; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: background 0.2s;
+  }
+  #signout-btn:hover { background: rgba(255,69,58,0.22); }
 
 </style>
 </head>
@@ -643,9 +694,18 @@
   </div>
   <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;min-width:140px;justify-content:flex-end;">
     <span id="sync-status"></span>
+    <button id="resync-btn" title="Refresh from Gist">↻</button>
     <div id="nav-stat" style="min-width:0;">—</div>
     <button id="edit-mode-btn" class="edit-off" title="Toggle edit mode">Edit</button>
     <button id="settings-btn" title="Settings">⚙</button>
+    <button id="account-btn">
+      <div id="account-avatar-fallback">A</div>
+      <span id="account-name">Abhee</span>
+    </button>
+    <div id="account-popover">
+      <div class="acct-email"><strong id="acct-name-full">Abhee Jani</strong><span id="acct-email-display"></span></div>
+      <button id="signout-btn">Sign out</button>
+    </div>
   </div>
 </nav>
 <!-- SETTINGS POPOVER -->
@@ -1166,7 +1226,17 @@ async function initState() {
   if (!token || !gistId) return;
 
   // 2. Fetch from Gist (Gist wins on conflict)
+  await fetchFromGist();
+}
+
+async function fetchFromGist() {
+  var token = getToken();
+  var gistId = getGistId();
+  if (!token || !gistId) return;
+
   showSync('Syncing…', 'syncing');
+  var resyncBtn = document.getElementById('resync-btn');
+  if (resyncBtn) { resyncBtn.classList.add('spinning'); resyncBtn.classList.remove('visible'); }
   try {
     var res = await fetch('https://api.github.com/gists/' + gistId, {
       headers: ghHeaders()
@@ -1184,12 +1254,16 @@ async function initState() {
       }
       showSync('Synced ✓', 'synced');
       hideSync(2000);
+      if (resyncBtn) { resyncBtn.classList.remove('spinning'); resyncBtn.classList.remove('visible'); }
     } else {
-      hideSync(0);
+      showSync('Sync failed (HTTP ' + res.status + ')', 'error');
+      hideSync(6000);
+      if (resyncBtn) { resyncBtn.classList.remove('spinning'); resyncBtn.classList.add('visible'); }
     }
   } catch(e) {
-    // Offline — already showing from cache
-    hideSync(0);
+    showSync('Sync error — offline?', 'error');
+    hideSync(6000);
+    if (resyncBtn) { resyncBtn.classList.remove('spinning'); resyncBtn.classList.add('visible'); }
   }
 }
 
@@ -1861,6 +1935,10 @@ async function startApp() {
   var editBtn = document.getElementById('edit-mode-btn');
   if (editBtn) editBtn.addEventListener('click', toggleEditMode);
 
+  // Re-sync button
+  var resyncBtn = document.getElementById('resync-btn');
+  if (resyncBtn) resyncBtn.addEventListener('click', function() { fetchFromGist(); });
+
   // Settings gear
   initSettings();
 
@@ -1957,6 +2035,10 @@ window.handleGoogleSignIn = async function handleCredentialResponse(response) {
     var info = await r.json();
     if (info.email === ALLOWED_EMAIL) {
       localStorage.setItem(AUTH_STORE_KEY, Date.now() + 28800000); // 8 h
+      // Store profile info for nav display
+      localStorage.setItem('fun_user_name', info.name || 'Abhee');
+      localStorage.setItem('fun_user_email', info.email || '');
+      localStorage.setItem('fun_user_picture', info.picture || '');
       document.getElementById("auth-gate").remove();
       init();
     } else {
@@ -1970,9 +2052,55 @@ window.handleGoogleSignIn = async function handleCredentialResponse(response) {
 }
 
 
+// ── Account button ────────────────────────────────────────────────────────────
+function initAccount() {
+  var name    = localStorage.getItem('fun_user_name') || 'Abhee';
+  var email   = localStorage.getItem('fun_user_email') || '';
+  var picture = localStorage.getItem('fun_user_picture') || '';
+
+  // Update avatar
+  if (picture) {
+    var fallback = document.getElementById('account-avatar-fallback');
+    if (fallback) {
+      fallback.outerHTML = '<img id="account-avatar" src="' + picture + '" referrerpolicy="no-referrer">';
+    }
+  }
+  var nameEl = document.getElementById('account-name');
+  if (nameEl) nameEl.textContent = name.split(' ')[0];
+  var emailEl = document.getElementById('acct-email-display');
+  if (emailEl) emailEl.textContent = email;
+  var fullEl = document.getElementById('acct-name-full');
+  if (fullEl) fullEl.textContent = name;
+
+  // Toggle popover
+  var btn = document.getElementById('account-btn');
+  var pop = document.getElementById('account-popover');
+  if (btn && pop) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      pop.classList.toggle('open');
+    });
+    document.addEventListener('click', function() { pop.classList.remove('open'); });
+  }
+
+  // Sign out
+  var signoutBtn = document.getElementById('signout-btn');
+  if (signoutBtn) {
+    signoutBtn.addEventListener('click', function() {
+      localStorage.removeItem(AUTH_STORE_KEY);
+      localStorage.removeItem('fun_user_name');
+      localStorage.removeItem('fun_user_email');
+      localStorage.removeItem('fun_user_picture');
+      location.reload();
+    });
+  }
+}
+
+
 function init() {
   if (!isAuthed()) { return; } // auth gate + onGoogleLibraryLoad handle sign-in
   var g = document.getElementById("auth-gate"); if (g) g.remove();
+  initAccount();
   if (!getToken()) {
     showSetupModal();
   } else {
