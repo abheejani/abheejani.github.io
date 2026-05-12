@@ -903,6 +903,7 @@ function ghHeaders() {
 // ── MODULE-LEVEL STATE & SAVE TIMER ─────────────────────────────────────────
 var appState = {};   // all keys live here after init
 var saveTimer = null;
+var localDirty = false; // true while a local change is pending Gist write
 
 // ── SYNC STATUS DISPLAY ──────────────────────────────────────────────────────
 var syncHideTimer = null;
@@ -950,8 +951,10 @@ async function writeToGist() {
 // ── DEBOUNCED SAVE ───────────────────────────────────────────────────────────
 async function saveState(key, data) {
   appState[key] = data;
+  lsSet(key, data);      // persist to localStorage immediately — survives refresh
+  localDirty = true;     // block Gist fetch from overwriting this pending change
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(function() { writeToGist(); }, 300);
+  saveTimer = setTimeout(function() { localDirty = false; writeToGist(); }, 300);
 }
 
 // Keep legacy per-key save shims that update appState then call saveState
@@ -1244,7 +1247,8 @@ async function fetchFromGist() {
     if (res.ok) {
       var data = await res.json();
       var fileContent = data.files && data.files['fun-state.json'] && data.files['fun-state.json'].content;
-      if (fileContent) {
+      if (fileContent && !localDirty) {
+        // Only apply Gist data if no local changes are pending — prevents overwriting unsaved edits
         var gistData = JSON.parse(fileContent);
         applyStoredData(gistData);
         // Update localStorage cache with fresh Gist data
